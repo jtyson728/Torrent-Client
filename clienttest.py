@@ -1,4 +1,11 @@
 from utorrentapi import UTorrentAPI
+import xmlrpc.client
+try:
+        proxy = xmlrpc.client.ServerProxy("http://factory.cs.rutgers.edu:8000/")
+finally:
+        print("3 is even: %s" % str(proxy.is_even(3)))
+        print("100 is even: %s" % str(proxy.is_even(100))
+
 
 apiclient = UTorrentAPI('http://127.0.0.1:35653/gui', 'admin', 'laky123')
 
