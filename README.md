@@ -5,9 +5,9 @@ uTorrent API Client for Python3
 
 ### 1. Setup up virtual environment
 
-This library uses ["requests"](http://docs.python-requests.org/en/master/), so you need to run pip3 install -r requirements.txt to download the depedencies.
+This library uses ["requests"](http://docs.python-requests.org/en/master/), so you need to `run pip3 install -r requirements.txt` to download the depedencies.
 
-Swithc to the virtual env by typing;
+Switch to the virtual env by typing;
 ```sh
 $ source env/bin/activate
 ```
