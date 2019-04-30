@@ -1,9 +1,10 @@
 from xmlrpc.server import SimpleXMLRPCServer
 
-def is_even(n):
-    return n % 2 == 0
+def respond(msg):
+	print(msg)
+	return("I got the message")
 
-server = SimpleXMLRPCServer(("factory.cs.rutgers.edu", 8000))
-print("Listening on port 8000...")
-server.register_function(is_even, "is_even")
+server = SimpleXMLRPCServer(("null.cs.rutgers.edu", 40000))
+print("Listening on port 40000...")
+server.register_function(respond, "respond")
 server.serve_forever()
