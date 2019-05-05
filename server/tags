@@ -1,0 +1,466 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/45968eff/
+ANNOUNCE_FAILED_SLEEP_TIME	torrent_client/algorithms/torrent_manager.py	/^    ANNOUNCE_FAILED_SLEEP_TIME = 3$/;"	v	class:TorrentManager
+ActionType	torrent_client/network/tracker_clients/udp.py	/^class ActionType(Enum):$/;"	c
+Announcer	torrent_client/algorithms/announcer.py	/^class Announcer:$/;"	c
+Architecture	README.md	/^Architecture$/;"	s
+Author	README.md	/^Author$/;"	s
+BaseTrackerClient	torrent_client/network/tracker_clients/base.py	/^class BaseTrackerClient:$/;"	c
+BlockRequest	torrent_client/models.py	/^class BlockRequest:$/;"	c
+BlockRequestFuture	torrent_client/models.py	/^class BlockRequestFuture(asyncio.Future, BlockRequest):$/;"	c
+CHOKING_CHANGING_TIME	torrent_client/algorithms/uploader.py	/^    CHOKING_CHANGING_TIME = 10$/;"	v	class:Uploader
+COLUMN_WIDTH	torrent_client/control/formatters.py	/^COLUMN_WIDTH = 30$/;"	v
+CONNECTED_RECENTLY_COEFF	torrent_client/algorithms/uploader.py	/^    CONNECTED_RECENTLY_COEFF = 3$/;"	v	class:Uploader
+CONNECTED_RECENTLY_THRESHOLD	torrent_client/algorithms/uploader.py	/^    CONNECTED_RECENTLY_THRESHOLD = 60$/;"	v	class:Uploader
+CONNECT_TIMEOUT	torrent_client/network/peer_tcp_client.py	/^    CONNECT_TIMEOUT = 5$/;"	v	class:PeerTCPClient
+Console interface	README.md	/^### Console interface$/;"	S
+ControlClient	torrent_client/control/client.py	/^class ControlClient:$/;"	c
+ControlManager	torrent_client/control/manager.py	/^class ControlManager(QObject):$/;"	c
+ControlManagerThread	torrent_gui.py	/^class ControlManagerThread(QThread):$/;"	c
+ControlServer	torrent_client/control/server.py	/^class ControlServer:$/;"	c
+DEFAULT_DOWNLOAD_DIR	torrent_cli.py	/^DEFAULT_DOWNLOAD_DIR = 'downloads'$/;"	v
+DEFAULT_MIN_INTERVAL	torrent_client/algorithms/announcer.py	/^    DEFAULT_MIN_INTERVAL = 90$/;"	v	class:Announcer
+DESIRED_PIECE_STOCK	torrent_client/algorithms/downloader.py	/^    DESIRED_PIECE_STOCK = ceil(_desired_request_stock \/ _requests_per_piece)$/;"	v	class:Downloader
+DISTRUST_RATE_TO_BAN	torrent_client/models.py	/^    DISTRUST_RATE_TO_BAN = 5$/;"	v	class:DownloadInfo
+DOWNLOAD_PEERS_ACTIVE_TO_REQUEST_MORE_PEERS	torrent_client/algorithms/downloader.py	/^    DOWNLOAD_PEERS_ACTIVE_TO_REQUEST_MORE_PEERS = 2$/;"	v	class:Downloader
+DOWNLOAD_PEER_COUNT	torrent_client/algorithms/downloader.py	/^    DOWNLOAD_PEER_COUNT = 15$/;"	v	class:Downloader
+DOWNLOAD_REQUEST_QUEUE_SIZE	torrent_client/algorithms/peer_manager.py	/^    DOWNLOAD_REQUEST_QUEUE_SIZE = 150$/;"	v	class:PeerData
+DaemonExit	torrent_client/control/server.py	/^class DaemonExit(Exception):$/;"	c
+DatagramReaderProtocol	torrent_client/network/tracker_clients/udp.py	/^class DatagramReaderProtocol:$/;"	c
+Debug mode	README.md	/^### Debug mode$/;"	S
+DownloadInfo	torrent_client/models.py	/^class DownloadInfo:$/;"	c
+Downloader	torrent_client/algorithms/downloader.py	/^class Downloader(QObject):$/;"	c
+EventType	torrent_client/network/tracker_clients/base.py	/^class EventType(Enum):$/;"	c
+FAKE_SERVER_PORT	torrent_client/algorithms/announcer.py	/^    FAKE_SERVER_PORT = 6881$/;"	v	class:Announcer
+FLAG_TRANSMISSION_TIMEOUT	torrent_client/algorithms/downloader.py	/^    FLAG_TRANSMISSION_TIMEOUT = 0.5$/;"	v	class:Downloader
+Features	README.md	/^Features$/;"	s
+FileInfo	torrent_client/models.py	/^class FileInfo:$/;"	c
+FileStructure	torrent_client/file_structure.py	/^class FileStructure:$/;"	c
+FileTreeNode	torrent_client/models.py	/^FileTreeNode = Union[FileInfo, Dict[str, Any]]$/;"	v
+Graphical interface	README.md	/^### Graphical interface$/;"	S
+HANDSHAKE_DATA	torrent_client/network/peer_tcp_client.py	/^    HANDSHAKE_DATA = bytes([len(_handshake_message)]) + _handshake_message$/;"	v	class:PeerTCPClient
+HANDSHAKE_MESSAGE	torrent_client/control/server.py	/^    HANDSHAKE_MESSAGE = b'bit-torrent:ControlServer\\n'$/;"	v	class:ControlServer
+HANG_PENALTY_COEFF	torrent_client/algorithms/downloader.py	/^    HANG_PENALTY_COEFF = 100$/;"	v	class:Downloader
+HANG_PENALTY_DURATION	torrent_client/algorithms/downloader.py	/^    HANG_PENALTY_DURATION = 10$/;"	v	class:Downloader
+HOST	torrent_client/control/server.py	/^    HOST = '127.0.0.1'$/;"	v	class:ControlServer
+HTTPTrackerClient	torrent_client/network/tracker_clients/http.py	/^class HTTPTrackerClient(BaseTrackerClient):$/;"	c
+ICON_DIRECTORY	torrent_gui.py	/^ICON_DIRECTORY = os.path.join(os.path.dirname(__file__), 'icons')$/;"	v
+INDENT	torrent_client/control/formatters.py	/^INDENT = ' ' * 4$/;"	v
+ITERS_PER_OPTIMISTIC_UNCHOKING	torrent_client/algorithms/uploader.py	/^    ITERS_PER_OPTIMISTIC_UNCHOKING = 3$/;"	v	class:Uploader
+Installation	README.md	/^Installation$/;"	s
+KEEP_ALIVE_TIMEOUT	torrent_client/algorithms/peer_manager.py	/^    KEEP_ALIVE_TIMEOUT = 2 * 60$/;"	v	class:PeerManager
+LENGTH_FMT	torrent_client/control/server.py	/^    LENGTH_FMT = '!I'$/;"	v	class:ControlServer
+LOGGER_LEVEL	torrent_client/algorithms/torrent_manager.py	/^    LOGGER_LEVEL = logging.DEBUG$/;"	v	class:TorrentManager
+LOGGER_LEVEL	torrent_client/network/peer_tcp_client.py	/^    LOGGER_LEVEL = logging.INFO$/;"	v	class:PeerTCPClient
+MAGIC_CONNECTION_ID	torrent_client/network/tracker_clients/udp.py	/^    MAGIC_CONNECTION_ID = 0x41727101980$/;"	v	class:UDPTrackerClient
+MARKED_BLOCK_SIZE	torrent_client/models.py	/^    MARKED_BLOCK_SIZE = 2 ** 10$/;"	v	class:DownloadInfo
+MAX_MESSAGE_LENGTH	torrent_client/network/peer_tcp_client.py	/^    MAX_MESSAGE_LENGTH = 2 ** 18$/;"	v	class:PeerTCPClient
+MAX_PEERS_TO_ACCEPT	torrent_client/algorithms/peer_manager.py	/^    MAX_PEERS_TO_ACCEPT = 55$/;"	v	class:PeerManager
+MAX_PEERS_TO_ACTIVELY_CONNECT	torrent_client/algorithms/peer_manager.py	/^    MAX_PEERS_TO_ACTIVELY_CONNECT = 30$/;"	v	class:PeerManager
+MAX_REQUEST_LENGTH	torrent_client/network/peer_tcp_client.py	/^    MAX_REQUEST_LENGTH = 2 ** 17$/;"	v	class:PeerTCPClient
+MAX_SILENCE_DURATION	torrent_client/network/peer_tcp_client.py	/^    MAX_SILENCE_DURATION = 3 * 60$/;"	v	class:PeerTCPClient
+MINUTES_PER_HOUR	torrent_client/utils.py	/^MINUTES_PER_HOUR = 60$/;"	v
+MIN_SPEED_TO_CALC_ETA	torrent_client/models.py	/^    MIN_SPEED_TO_CALC_ETA = 100 * 2 ** 10  # = 100 KiB\/s$/;"	v	class:TorrentState
+MIN_SPEED_TO_SHOW_ETA	torrent_client/control/formatters.py	/^MIN_SPEED_TO_SHOW_ETA = 100 * 2 ** 10  # bytes\/s$/;"	v
+MainWindow	torrent_gui.py	/^class MainWindow(QMainWindow):$/;"	c
+MessageType	torrent_client/network/peer_tcp_client.py	/^class MessageType(Enum):$/;"	c
+NO_PEERS_SLEEP_TIME	torrent_client/algorithms/downloader.py	/^    NO_PEERS_SLEEP_TIME = 3$/;"	v	class:Downloader
+NO_PEERS_SLEEP_TIME_ON_STARTING	torrent_client/algorithms/downloader.py	/^    NO_PEERS_SLEEP_TIME_ON_STARTING = 1$/;"	v	class:Downloader
+NoRequestsError	torrent_client/algorithms/downloader.py	/^class NoRequestsError(RuntimeError):$/;"	c
+NotEnoughPeersError	torrent_client/algorithms/downloader.py	/^class NotEnoughPeersError(RuntimeError):$/;"	c
+PATH_SPLIT_RE	torrent_cli.py	/^PATH_SPLIT_RE = re.compile(r'\/|{}'.format(re.escape(os.path.sep)))$/;"	v
+PEER_CONSIDERATION_TIME	torrent_client/models.py	/^    PEER_CONSIDERATION_TIME = 10$/;"	v	class:SessionStatistics
+PIECE_FINISH_SIGNAL_MIN_INTERVAL	torrent_client/algorithms/downloader.py	/^    PIECE_FINISH_SIGNAL_MIN_INTERVAL = 1$/;"	v	class:Downloader
+PORT_RANGE	torrent_client/control/server.py	/^    PORT_RANGE = range(6995, 6999 + 1)$/;"	v	class:ControlServer
+PORT_RANGE	torrent_client/network/peer_tcp_server.py	/^    PORT_RANGE = range(6881, 6889 + 1)$/;"	v	class:PeerTCPServer
+PROGRESS_BAR_WIDTH	torrent_client/control/formatters.py	/^PROGRESS_BAR_WIDTH = 50$/;"	v
+Peer	torrent_client/models.py	/^class Peer:$/;"	c
+PeerData	torrent_client/algorithms/peer_manager.py	/^class PeerData:$/;"	c
+PeerManager	torrent_client/algorithms/peer_manager.py	/^class PeerManager:$/;"	c
+PeerTCPClient	torrent_client/network/peer_tcp_client.py	/^class PeerTCPClient:$/;"	c
+PeerTCPServer	torrent_client/network/peer_tcp_server.py	/^class PeerTCPServer:$/;"	c
+PieceInfo	torrent_client/models.py	/^class PieceInfo:$/;"	c
+QObject	torrent_client/algorithms/downloader.py	/^QObject, pyqtSignal = import_signals()$/;"	v
+QObject	torrent_client/algorithms/speed_measurer.py	/^QObject, pyqtSignal = import_signals()$/;"	v
+QObject	torrent_client/algorithms/torrent_manager.py	/^QObject, pyqtSignal = import_signals()$/;"	v
+QObject	torrent_client/control/manager.py	/^QObject, pyqtSignal = import_signals()$/;"	v
+RAREST_PIECE_COUNT_TO_SELECT	torrent_client/algorithms/downloader.py	/^    RAREST_PIECE_COUNT_TO_SELECT = 10$/;"	v	class:Downloader
+READ_TIMEOUT	torrent_client/network/peer_tcp_client.py	/^    READ_TIMEOUT = 5$/;"	v	class:PeerTCPClient
+RECONNECT_TIMEOUT	torrent_client/algorithms/downloader.py	/^    RECONNECT_TIMEOUT = 50$/;"	v	class:Downloader
+REQUEST_LENGTH	torrent_client/algorithms/downloader.py	/^    REQUEST_LENGTH = 2 ** 14$/;"	v	class:Downloader
+REQUEST_TIMEOUT	torrent_client/algorithms/downloader.py	/^    REQUEST_TIMEOUT = 6$/;"	v	class:Downloader
+REQUEST_TIMEOUT	torrent_client/network/tracker_clients/http.py	/^    REQUEST_TIMEOUT = 5$/;"	v	class:HTTPTrackerClient
+REQUEST_TIMEOUT	torrent_client/network/tracker_clients/udp.py	/^    REQUEST_TIMEOUT = 12$/;"	v	class:UDPTrackerClient
+REQUEST_TIMEOUT_ENDGAME	torrent_client/algorithms/downloader.py	/^    REQUEST_TIMEOUT_ENDGAME = 1$/;"	v	class:Downloader
+RESERVED_BYTES	torrent_client/network/peer_tcp_client.py	/^    RESERVED_BYTES = b'\\0' * 8$/;"	v	class:PeerTCPClient
+RESPONSE_HEADER_FMT	torrent_client/network/tracker_clients/udp.py	/^    RESPONSE_HEADER_FMT = '!II'$/;"	v	class:UDPTrackerClient
+RESPONSE_HEADER_LEN	torrent_client/network/tracker_clients/udp.py	/^    RESPONSE_HEADER_LEN = struct.calcsize(RESPONSE_HEADER_FMT)$/;"	v	class:UDPTrackerClient
+SECONDS_PER_MINUTE	torrent_client/utils.py	/^SECONDS_PER_MINUTE = 60$/;"	v
+SELECTION_LABEL_FORMAT	torrent_gui.py	/^    SELECTION_LABEL_FORMAT = 'Selected {} files ({})'$/;"	v	class:TorrentAddingDialog
+SHA1_DIGEST_LEN	torrent_client/models.py	/^SHA1_DIGEST_LEN = 20$/;"	v
+SHORT_NAME_LEN	torrent_client/algorithms/torrent_manager.py	/^    SHORT_NAME_LEN = 19$/;"	v	class:TorrentManager
+SPEED_MEASUREMENT_PERIOD	torrent_client/algorithms/speed_measurer.py	/^    SPEED_MEASUREMENT_PERIOD = 60$/;"	v	class:SpeedMeasurer
+SPEED_UPDATE_TIMEOUT	torrent_client/algorithms/speed_measurer.py	/^    SPEED_UPDATE_TIMEOUT = 2$/;"	v	class:SpeedMeasurer
+STARTING_DURATION	torrent_client/algorithms/downloader.py	/^    STARTING_DURATION = 5$/;"	v	class:Downloader
+STATE_UPDATE_INTERVAL	torrent_client/control/manager.py	/^    STATE_UPDATE_INTERVAL = 5 * 60$/;"	v	class:ControlManager
+SeedError	torrent_client/network/peer_tcp_client.py	/^class SeedError(Exception):$/;"	c
+SessionStatistics	torrent_client/models.py	/^class SessionStatistics:$/;"	c
+SpeedMeasurer	torrent_client/algorithms/speed_measurer.py	/^class SpeedMeasurer(QObject):$/;"	c
+T	torrent_client/control/client.py	/^T = TypeVar('T')$/;"	v
+T	torrent_client/utils.py	/^T = TypeVar('T', Sequence, memoryview)$/;"	v
+TorrentAddingDialog	torrent_gui.py	/^class TorrentAddingDialog(QDialog):$/;"	c
+TorrentInfo	torrent_client/models.py	/^class TorrentInfo:$/;"	c
+TorrentListWidget	torrent_gui.py	/^class TorrentListWidget(QListWidget):$/;"	c
+TorrentListWidgetItem	torrent_gui.py	/^class TorrentListWidgetItem(QWidget):$/;"	c
+TorrentManager	torrent_client/algorithms/torrent_manager.py	/^class TorrentManager(QObject):$/;"	c
+TorrentState	torrent_client/models.py	/^class TorrentState:$/;"	c
+TrackerError	torrent_client/network/tracker_clients/base.py	/^class TrackerError(Exception):$/;"	c
+UDPTrackerClient	torrent_client/network/tracker_clients/udp.py	/^class UDPTrackerClient(BaseTrackerClient):$/;"	c
+UNIT_BASE	torrent_client/utils.py	/^UNIT_BASE = 2 ** 10$/;"	v
+UNIT_PREFIXES	torrent_client/utils.py	/^UNIT_PREFIXES = 'KMG'$/;"	v
+UPLOAD_PEER_COUNT	torrent_client/algorithms/uploader.py	/^    UPLOAD_PEER_COUNT = 4$/;"	v	class:Uploader
+Uploader	torrent_client/algorithms/uploader.py	/^class Uploader:$/;"	c
+Usage	README.md	/^Usage$/;"	s
+WRITE_TIMEOUT	torrent_client/network/peer_tcp_client.py	/^    WRITE_TIMEOUT = 5$/;"	v	class:PeerTCPClient
+_INF	torrent_client/algorithms/downloader.py	/^    _INF = float('inf')$/;"	v	class:Downloader
+_KEEP_ALIVE_MESSAGE	torrent_client/network/peer_tcp_client.py	/^    _KEEP_ALIVE_MESSAGE = b'\\0' * 4$/;"	v	class:PeerTCPClient
+__aenter__	torrent_client/control/client.py	/^    async def __aenter__(self) -> 'ControlClient':$/;"	m	class:ControlClient
+__aexit__	torrent_client/control/client.py	/^    async def __aexit__(self, exc_type, exc_val, exc_tb):$/;"	m	class:ControlClient
+__all__	torrent_client/algorithms/torrent_manager.py	/^__all__ = ['TorrentManager']$/;"	v
+__all__	torrent_client/control/client.py	/^__all__ = ['ControlClient']$/;"	v
+__all__	torrent_client/control/manager.py	/^__all__ = ['ControlManager']$/;"	v
+__all__	torrent_client/control/server.py	/^__all__ = ['ControlServer', 'DaemonExit']$/;"	v
+__all__	torrent_client/network/peer_tcp_client.py	/^__all__ = ['PeerTCPClient']$/;"	v
+__all__	torrent_client/network/peer_tcp_server.py	/^__all__= ['PeerTCPServer']$/;"	v
+__all__	torrent_client/network/tracker_clients/base.py	/^__all__ = ['EventType', 'TrackerError', 'BaseTrackerClient']$/;"	v
+__all__	torrent_client/network/tracker_clients/http.py	/^__all__ = ['HTTPTrackerClient']$/;"	v
+__all__	torrent_client/network/tracker_clients/udp.py	/^__all__ = ['UDPTrackerClient']$/;"	v
+__eq__	torrent_client/models.py	/^    __eq__ = asyncio.Future.__eq__$/;"	v	class:BlockRequestFuture	file:
+__eq__	torrent_client/models.py	/^    def __eq__(self, other):$/;"	m	class:BlockRequest
+__eq__	torrent_client/models.py	/^    def __eq__(self, other):$/;"	m	class:Peer
+__hash__	torrent_client/models.py	/^    __hash__ = asyncio.Future.__hash__$/;"	v	class:BlockRequestFuture	file:
+__hash__	torrent_client/models.py	/^    def __hash__(self):$/;"	m	class:BlockRequest
+__hash__	torrent_client/models.py	/^    def __hash__(self):$/;"	m	class:Peer
+__init__	torrent_client/algorithms/announcer.py	/^    def __init__(self, torrent_info: TorrentInfo, our_peer_id: bytes, server_port: int, logger: /;"	m	class:Announcer
+__init__	torrent_client/algorithms/downloader.py	/^    def __init__(self, torrent_info: TorrentInfo, our_peer_id: bytes,$/;"	m	class:Downloader
+__init__	torrent_client/algorithms/peer_manager.py	/^    def __init__(self, client: PeerTCPClient, client_task: asyncio.Task, connected_time: float):$/;"	m	class:PeerData
+__init__	torrent_client/algorithms/peer_manager.py	/^    def __init__(self, torrent_info: TorrentInfo, our_peer_id: bytes,$/;"	m	class:PeerManager
+__init__	torrent_client/algorithms/speed_measurer.py	/^    def __init__(self, statistics: SessionStatistics):$/;"	m	class:SpeedMeasurer
+__init__	torrent_client/algorithms/torrent_manager.py	/^    def __init__(self, torrent_info: TorrentInfo, our_peer_id: bytes, server_port: Optional[int]/;"	m	class:TorrentManager
+__init__	torrent_client/algorithms/uploader.py	/^    def __init__(self, torrent_info: TorrentInfo, logger: logging.Logger, peer_manager: PeerMana/;"	m	class:Uploader
+__init__	torrent_client/control/client.py	/^    def __init__(self):$/;"	m	class:ControlClient
+__init__	torrent_client/control/manager.py	/^    def __init__(self):$/;"	m	class:ControlManager
+__init__	torrent_client/control/server.py	/^    def __init__(self, control: ControlManager, daemon_stop_handler: Optional[Callable[['Control/;"	m	class:ControlServer
+__init__	torrent_client/file_structure.py	/^    def __init__(self, download_dir: str, download_info: DownloadInfo):$/;"	m	class:FileStructure
+__init__	torrent_client/models.py	/^    def __init__(self, download_info: DownloadInfo, announce_list: List[List[str]], *, download_/;"	m	class:TorrentInfo
+__init__	torrent_client/models.py	/^    def __init__(self, host: str, port: int, peer_id: bytes=None):$/;"	m	class:Peer
+__init__	torrent_client/models.py	/^    def __init__(self, info_hash: bytes,$/;"	m	class:DownloadInfo
+__init__	torrent_client/models.py	/^    def __init__(self, length: int, path: List[str], *, md5sum: str=None):$/;"	m	class:FileInfo
+__init__	torrent_client/models.py	/^    def __init__(self, piece_hash: bytes, length: int):$/;"	m	class:PieceInfo
+__init__	torrent_client/models.py	/^    def __init__(self, piece_index: int, block_begin: int, block_length: int):$/;"	m	class:BlockRequest
+__init__	torrent_client/models.py	/^    def __init__(self, piece_index: int, block_begin: int, block_length: int):$/;"	m	class:BlockRequestFuture
+__init__	torrent_client/models.py	/^    def __init__(self, prev_session_stats: Optional['SessionStatistics']):$/;"	m	class:SessionStatistics
+__init__	torrent_client/models.py	/^    def __init__(self, torrent_info: TorrentInfo):$/;"	m	class:TorrentState
+__init__	torrent_client/network/peer_tcp_client.py	/^    def __init__(self, our_peer_id: bytes, peer: Peer):$/;"	m	class:PeerTCPClient
+__init__	torrent_client/network/peer_tcp_server.py	/^    def __init__(self, our_peer_id: bytes, torrent_managers: Dict[bytes, 'algorithms.TorrentMana/;"	m	class:PeerTCPServer
+__init__	torrent_client/network/tracker_clients/base.py	/^    def __init__(self, download_info: DownloadInfo, our_peer_id: bytes):$/;"	m	class:BaseTrackerClient
+__init__	torrent_client/network/tracker_clients/http.py	/^    def __init__(self, url: urllib.parse.ParseResult, download_info: DownloadInfo, our_peer_id: /;"	m	class:HTTPTrackerClient
+__init__	torrent_client/network/tracker_clients/udp.py	/^    def __init__(self):$/;"	m	class:DatagramReaderProtocol
+__init__	torrent_client/network/tracker_clients/udp.py	/^    def __init__(self, url: urllib.parse.ParseResult, download_info: DownloadInfo, our_peer_id: /;"	m	class:UDPTrackerClient
+__init__	torrent_gui.py	/^    def __init__(self):$/;"	m	class:ControlManagerThread
+__init__	torrent_gui.py	/^    def __init__(self):$/;"	m	class:TorrentListWidgetItem
+__init__	torrent_gui.py	/^    def __init__(self, control_thread: 'ControlManagerThread'):$/;"	m	class:MainWindow
+__init__	torrent_gui.py	/^    def __init__(self, parent: QWidget, filename: str, torrent_info: TorrentInfo,$/;"	m	class:TorrentAddingDialog
+__init__	torrent_gui.py	/^    def __init__(self, parent=None):$/;"	m	class:TorrentListWidget
+__repr__	torrent_client/models.py	/^    def __repr__(self):$/;"	m	class:Peer
+_accept	torrent_client/control/server.py	/^    async def _accept(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):$/;"	m	class:ControlServer
+_accept	torrent_client/network/peer_tcp_server.py	/^    async def _accept(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter):$/;"	m	class:PeerTCPServer
+_add_torrent_item	torrent_gui.py	/^    def _add_torrent_item(self, state: TorrentState):$/;"	m	class:MainWindow
+_add_torrents_triggered	torrent_gui.py	/^    def _add_torrents_triggered(self):$/;"	m	class:MainWindow
+_browse	torrent_gui.py	/^    def _browse(self):$/;"	m	class:TorrentAddingDialog
+_check_connect	torrent_client/network/peer_tcp_client.py	/^    def _check_connect(self):$/;"	m	class:PeerTCPClient
+_check_payload_len	torrent_client/network/peer_tcp_client.py	/^    def _check_payload_len(message_id: MessageType, payload: memoryview, expected_len: int):$/;"	m	class:PeerTCPClient
+_check_position_range	torrent_client/network/peer_tcp_client.py	/^    def _check_position_range(self, request: BlockRequest):$/;"	m	class:PeerTCPClient
+_check_response	torrent_client/network/tracker_clients/udp.py	/^    def _check_response(response: bytes, expected_transaction_id: bytes, expected_action: Action/;"	m	class:UDPTrackerClient
+_control_action_triggered	torrent_gui.py	/^    def _control_action_triggered(self, action):$/;"	m	class:MainWindow
+_create_file_tree	torrent_client/models.py	/^    def _create_file_tree(self):$/;"	m	class:DownloadInfo
+_desired_request_stock	torrent_client/algorithms/downloader.py	/^    _desired_request_stock = DOWNLOAD_PEER_COUNT * PeerData.DOWNLOAD_REQUEST_QUEUE_SIZE$/;"	v	class:Downloader
+_dump_state	torrent_client/control/manager.py	/^    def _dump_state(self):$/;"	m	class:ControlManager
+_error_happened	torrent_gui.py	/^    def _error_happened(self, description: str, err: Exception):$/;"	m	class:MainWindow
+_execute_block_requests	torrent_client/algorithms/downloader.py	/^    async def _execute_block_requests(self, processed_requests: List[BlockRequestFuture]):$/;"	m	class:Downloader
+_execute_keeping_alive	torrent_client/algorithms/peer_manager.py	/^    async def _execute_keeping_alive(self):$/;"	m	class:PeerManager
+_execute_peer_client	torrent_client/algorithms/peer_manager.py	/^    async def _execute_peer_client(self, peer: Peer, client: PeerTCPClient, *, need_connect: boo/;"	m	class:PeerManager
+_execute_state_updates	torrent_client/control/manager.py	/^    async def _execute_state_updates(self):$/;"	m	class:ControlManager
+_finish_downloading_piece	torrent_client/algorithms/downloader.py	/^    def _finish_downloading_piece(self, piece_index: int):$/;"	m	class:Downloader
+_flush_piece	torrent_client/algorithms/downloader.py	/^    async def _flush_piece(self, index: int):$/;"	m	class:Downloader
+_get_actual_peer_count	torrent_client/models.py	/^    def _get_actual_peer_count(time_dict: Dict[Peer, float]) -> int:$/;"	m	class:SessionStatistics
+_get_directory_browse_widget	torrent_gui.py	/^    def _get_directory_browse_widget(self):$/;"	m	class:TorrentAddingDialog
+_get_file_tree_node	torrent_client/models.py	/^    def _get_file_tree_node(self, path: List[str]) -> FileTreeNode:$/;"	m	class:DownloadInfo
+_get_non_finished_pieces	torrent_client/algorithms/downloader.py	/^    def _get_non_finished_pieces(self) -> List[int]:$/;"	m	class:Downloader
+_get_piece_position	torrent_client/algorithms/downloader.py	/^    def _get_piece_position(self, index: int) -> Tuple[int, int]:$/;"	m	class:Downloader
+_handle_block	torrent_client/network/peer_tcp_client.py	/^    async def _handle_block(self, payload: memoryview):$/;"	m	class:PeerTCPClient
+_handle_haves	torrent_client/network/peer_tcp_client.py	/^    def _handle_haves(self, message_id: MessageType, payload: memoryview):$/;"	m	class:PeerTCPClient
+_handle_optional_response_fields	torrent_client/network/tracker_clients/http.py	/^    def _handle_optional_response_fields(self, response: OrderedDict):$/;"	m	class:HTTPTrackerClient
+_handle_primary_response_fields	torrent_client/network/tracker_clients/http.py	/^    def _handle_primary_response_fields(self, response: OrderedDict):$/;"	m	class:HTTPTrackerClient
+_handle_requests	torrent_client/network/peer_tcp_client.py	/^    async def _handle_requests(self, message_id: MessageType, payload: memoryview):$/;"	m	class:PeerTCPClient
+_handle_setting_states	torrent_client/network/peer_tcp_client.py	/^    def _handle_setting_states(self, message_id: MessageType, payload: memoryview):$/;"	m	class:PeerTCPClient
+_handshake_message	torrent_client/network/peer_tcp_client.py	/^    _handshake_message = b'BitTorrent protocol'$/;"	v	class:PeerTCPClient
+_invoke_control_action	torrent_gui.py	/^    async def _invoke_control_action(action, info_hash: bytes):$/;"	m	class:MainWindow
+_iter_files	torrent_client/file_structure.py	/^    def _iter_files(self, offset: int, data_length: int) -> Iterable[Tuple[BinaryIO, int, int]]:$/;"	m	class:FileStructure
+_mark_as_owner	torrent_client/network/peer_tcp_client.py	/^    def _mark_as_owner(self, piece_index: int):$/;"	m	class:PeerTCPClient
+_name_font	torrent_gui.py	/^    _name_font = QFont()$/;"	v	class:TorrentListWidgetItem
+_populate_info	torrent_client/network/peer_tcp_client.py	/^    def _populate_info(self, download_info: DownloadInfo, file_structure: FileStructure):$/;"	m	class:PeerTCPClient
+_receive_info	torrent_client/network/peer_tcp_client.py	/^    async def _receive_info(self) -> bytes:$/;"	m	class:PeerTCPClient
+_receive_message	torrent_client/network/peer_tcp_client.py	/^    async def _receive_message(self) -> Optional[Tuple[MessageType, memoryview]]:$/;"	m	class:PeerTCPClient
+_receive_protocol_data	torrent_client/network/peer_tcp_client.py	/^    async def _receive_protocol_data(self):$/;"	m	class:PeerTCPClient
+_remove_torrent_item	torrent_gui.py	/^    def _remove_torrent_item(self, info_hash: bytes):$/;"	m	class:MainWindow
+_request_blocks	torrent_client/algorithms/downloader.py	/^    def _request_blocks(self, max_pending_count: int) -> List[BlockRequestFuture]:$/;"	m	class:Downloader
+_request_piece_blocks	torrent_client/algorithms/downloader.py	/^    def _request_piece_blocks(self, max_pending_count: int, piece_index: int) -> Iterator[BlockR/;"	m	class:Downloader
+_requests_per_piece	torrent_client/algorithms/downloader.py	/^    _requests_per_piece = ceil(_typical_piece_length \/ REQUEST_LENGTH)$/;"	v	class:Downloader
+_select_new_piece	torrent_client/algorithms/downloader.py	/^    def _select_new_piece(self, *, force: bool) -> Optional[int]:$/;"	m	class:Downloader
+_select_optimistically_unchoked	torrent_client/algorithms/uploader.py	/^    def _select_optimistically_unchoked(self, peers: Iterable[Peer]) -> Peer:$/;"	m	class:Uploader
+_send_bitfield	torrent_client/network/peer_tcp_client.py	/^    def _send_bitfield(self):$/;"	m	class:PeerTCPClient
+_send_block	torrent_client/network/peer_tcp_client.py	/^    async def _send_block(self, request: BlockRequest):$/;"	m	class:PeerTCPClient
+_send_cancels	torrent_client/algorithms/downloader.py	/^    def _send_cancels(self, request: BlockRequestFuture):$/;"	m	class:Downloader
+_send_message	torrent_client/network/peer_tcp_client.py	/^    def _send_message(self, message_id: MessageType=None, *payload: List[bytes]):$/;"	m	class:PeerTCPClient
+_send_protocol_data	torrent_client/network/peer_tcp_client.py	/^    def _send_protocol_data(self):$/;"	m	class:PeerTCPClient
+_set_check_state_to_tree	torrent_gui.py	/^    def _set_check_state_to_tree(self, item: QTreeWidgetItem, check_state: Qt.CheckState):$/;"	m	class:TorrentAddingDialog
+_show_about	torrent_gui.py	/^    def _show_about(self):$/;"	m	class:MainWindow
+_shuffle_announce_tiers	torrent_client/algorithms/torrent_manager.py	/^    def _shuffle_announce_tiers(self):$/;"	m	class:TorrentManager
+_start_downloading_piece	torrent_client/algorithms/downloader.py	/^    def _start_downloading_piece(self, piece_index: int):$/;"	m	class:Downloader
+_start_torrent_manager	torrent_client/control/manager.py	/^    def _start_torrent_manager(self, torrent_info: TorrentInfo):$/;"	m	class:ControlManager
+_stats_font	torrent_gui.py	/^    _stats_font = QFont()$/;"	v	class:TorrentListWidgetItem
+_stop_torrent_manager	torrent_client/control/manager.py	/^    async def _stop_torrent_manager(self, info_hash: bytes):$/;"	m	class:ControlManager
+_traverse_file_tree	torrent_gui.py	/^    def _traverse_file_tree(self, name: str, node: FileTreeNode, parent: QWidget):$/;"	m	class:TorrentAddingDialog
+_traverse_nodes	torrent_client/models.py	/^    def _traverse_nodes(node: FileTreeNode) -> Iterator[FileInfo]:$/;"	m	class:DownloadInfo
+_typical_piece_length	torrent_client/algorithms/downloader.py	/^    _typical_piece_length = 2 ** 20$/;"	v	class:Downloader
+_update	torrent_gui.py	/^    def _update(self):$/;"	m	class:TorrentListWidgetItem
+_update_checkboxes	torrent_gui.py	/^    def _update_checkboxes(self, item: QTreeWidgetItem, column: int):$/;"	m	class:TorrentAddingDialog
+_update_control_action_state	torrent_gui.py	/^    def _update_control_action_state(self):$/;"	m	class:MainWindow
+_update_selection_label	torrent_gui.py	/^    def _update_selection_label(self):$/;"	m	class:TorrentAddingDialog
+_update_torrent_item	torrent_gui.py	/^    def _update_torrent_item(self, state: TorrentState):$/;"	m	class:MainWindow
+_validate_piece	torrent_client/algorithms/downloader.py	/^    async def _validate_piece(self, piece_index: int):$/;"	m	class:Downloader
+_wait_more_peers	torrent_client/algorithms/downloader.py	/^    async def _wait_more_peers(self):$/;"	m	class:Downloader
+_wait_more_requests	torrent_client/algorithms/downloader.py	/^    async def _wait_more_requests(self):$/;"	m	class:Downloader
+_wakeup_waiter	torrent_client/network/tracker_clients/udp.py	/^    def _wakeup_waiter(self):$/;"	m	class:DatagramReaderProtocol
+accept	torrent_client/network/peer_tcp_client.py	/^    async def accept(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter) -> bytes:$/;"	m	class:PeerTCPClient
+accept_client	torrent_client/algorithms/peer_manager.py	/^    def accept_client(self, peer: Peer, client: PeerTCPClient):$/;"	m	class:PeerManager
+accept_client	torrent_client/algorithms/torrent_manager.py	/^    def accept_client(self, peer: Peer, client: PeerTCPClient):$/;"	m	class:TorrentManager
+add	torrent_client/control/manager.py	/^    def add(self, torrent_info: TorrentInfo):$/;"	m	class:ControlManager
+add-circle	icons/add.svg	/^	<g id="add-circle">$/;"	i
+add_downloaded	torrent_client/models.py	/^    def add_downloaded(self, peer: Peer, size: int):$/;"	m	class:SessionStatistics
+add_handler	torrent_cli.py	/^async def add_handler(args):$/;"	f
+add_torrent_files	torrent_gui.py	/^    def add_torrent_files(self, paths: List[str]):$/;"	m	class:MainWindow
+add_uploaded	torrent_client/models.py	/^    def add_uploaded(self, peer: Peer, size: int):$/;"	m	class:SessionStatistics
+am_choking	torrent_client/network/peer_tcp_client.py	/^    def am_choking(self):$/;"	m	class:PeerTCPClient
+am_choking	torrent_client/network/peer_tcp_client.py	/^    def am_choking(self, value: bool):$/;"	m	class:PeerTCPClient
+am_interested	torrent_client/network/peer_tcp_client.py	/^    def am_interested(self):$/;"	m	class:PeerTCPClient
+am_interested	torrent_client/network/peer_tcp_client.py	/^    def am_interested(self, value: bool):$/;"	m	class:PeerTCPClient
+announce	torrent_client/network/tracker_clients/base.py	/^    async def announce(self, server_port: int, event: EventType):$/;"	m	class:BaseTrackerClient
+announce	torrent_client/network/tracker_clients/http.py	/^    async def announce(self, server_port: int, event: EventType):$/;"	m	class:HTTPTrackerClient
+announce	torrent_client/network/tracker_clients/udp.py	/^    announce = 1$/;"	v	class:ActionType
+announce	torrent_client/network/tracker_clients/udp.py	/^    async def announce(self, server_port: int, event: EventType):$/;"	m	class:UDPTrackerClient
+announce_list	torrent_client/models.py	/^    def announce_list(self) -> List[List[str]]:$/;"	m	class:TorrentInfo
+are_all_blocks_downloaded	torrent_client/models.py	/^    def are_all_blocks_downloaded(self) -> bool:$/;"	m	class:PieceInfo
+bit-torrent	README.md	/^bit-torrent$/;"	c
+bitfield	torrent_client/network/peer_tcp_client.py	/^    bitfield = 5$/;"	v	class:MessageType
+blocks_expected	torrent_client/models.py	/^    def blocks_expected(self) -> Optional[Set[BlockRequestFuture]]:$/;"	m	class:PieceInfo
+bytes_left	torrent_client/models.py	/^    def bytes_left(self) -> int:$/;"	m	class:DownloadInfo
+cancel	torrent_client/network/peer_tcp_client.py	/^    cancel = 8$/;"	v	class:MessageType
+check_daemon_absence	torrent_cli.py	/^async def check_daemon_absence():$/;"	f
+choke	torrent_client/network/peer_tcp_client.py	/^    choke = 0$/;"	v	class:MessageType
+client	torrent_client/algorithms/peer_manager.py	/^    def client(self) -> PeerTCPClient:$/;"	m	class:PeerData
+client_task	torrent_client/algorithms/peer_manager.py	/^    def client_task(self) -> asyncio.Task:$/;"	m	class:PeerData
+close	torrent_client/control/client.py	/^    def close(self):$/;"	m	class:ControlClient
+close	torrent_client/file_structure.py	/^    def close(self):$/;"	m	class:FileStructure
+close	torrent_client/network/peer_tcp_client.py	/^    def close(self):$/;"	m	class:PeerTCPClient
+complete	torrent_client/models.py	/^    def complete(self) -> bool:$/;"	m	class:DownloadInfo
+complete	torrent_client/models.py	/^    def complete(self, value: bool):$/;"	m	class:DownloadInfo
+completed	torrent_client/network/tracker_clients/base.py	/^    completed = 1$/;"	v	class:EventType
+confirm_info_hash	torrent_client/network/peer_tcp_client.py	/^    def confirm_info_hash(self, download_info: DownloadInfo, file_structure: FileStructure):$/;"	m	class:PeerTCPClient
+connect	torrent_client/control/client.py	/^    async def connect(self):$/;"	m	class:ControlClient
+connect	torrent_client/network/peer_tcp_client.py	/^    async def connect(self, download_info: DownloadInfo, file_structure: FileStructure):$/;"	m	class:PeerTCPClient
+connect	torrent_client/network/tracker_clients/udp.py	/^    connect = 0$/;"	v	class:ActionType
+connect_to_peers	torrent_client/algorithms/peer_manager.py	/^    def connect_to_peers(self, peers: Sequence[Peer], force: bool):$/;"	m	class:PeerManager
+connected_time	torrent_client/algorithms/peer_manager.py	/^    def connected_time(self) -> float:$/;"	m	class:PeerData
+connection_lost	torrent_client/network/tracker_clients/udp.py	/^    def connection_lost(self, exc: Exception):$/;"	m	class:DatagramReaderProtocol
+connection_made	torrent_client/network/tracker_clients/udp.py	/^    def connection_made(self, transport: asyncio.DatagramTransport):$/;"	m	class:DatagramReaderProtocol
+control	torrent_client/control/server.py	/^    def control(self) -> ControlManager:$/;"	m	class:ControlServer
+control	torrent_gui.py	/^    def control(self) -> ControlManager:$/;"	m	class:ControlManagerThread
+control_action_handler	torrent_cli.py	/^async def control_action_handler(args):$/;"	f
+create_tracker_client	torrent_client/network/tracker_clients/__init__.py	/^def create_tracker_client(announce_url: str, download_info: DownloadInfo, our_peer_id: bytes) ->/;"	f
+datagram_received	torrent_client/network/tracker_clients/udp.py	/^    def datagram_received(self, data: bytes, addr: tuple):$/;"	m	class:DatagramReaderProtocol
+delegate_to_executor	torrent_client/file_structure.py	/^def delegate_to_executor(func):$/;"	f
+directory_icon	torrent_gui.py	/^directory_icon = load_icon('directory')$/;"	v
+downloaded	torrent_client/models.py	/^    def downloaded(self) -> bool:$/;"	m	class:PieceInfo
+downloaded	torrent_client/network/peer_tcp_client.py	/^    def downloaded(self):$/;"	m	class:PeerTCPClient
+downloaded_per_session	torrent_client/models.py	/^    def downloaded_per_session(self) -> int:$/;"	m	class:SessionStatistics
+downloading_peer_count	torrent_client/models.py	/^    def downloading_peer_count(self) -> int:$/;"	m	class:SessionStatistics
+dragEnterEvent	torrent_gui.py	/^    dragEnterEvent = drag_handler$/;"	v	class:TorrentListWidget
+dragMoveEvent	torrent_gui.py	/^    dragMoveEvent = drag_handler$/;"	v	class:TorrentListWidget
+drag_handler	torrent_gui.py	/^    def drag_handler(self, event: QDropEvent, drop: bool=False):$/;"	m	class:TorrentListWidget
+drain	torrent_client/network/peer_tcp_client.py	/^    async def drain(self):$/;"	m	class:PeerTCPClient
+dropEvent	torrent_gui.py	/^    dropEvent = partialmethod(drag_handler, drop=True)$/;"	v	class:TorrentListWidget
+error	torrent_client/network/tracker_clients/udp.py	/^    error = 3$/;"	v	class:ActionType
+error_happened	torrent_gui.py	/^    error_happened = pyqtSignal(str, Exception)$/;"	v	class:ControlManagerThread
+error_received	torrent_client/network/tracker_clients/udp.py	/^    def error_received(self, exc: Exception):$/;"	m	class:DatagramReaderProtocol
+eta_seconds	torrent_client/models.py	/^    def eta_seconds(self) -> Optional[int]:$/;"	m	class:TorrentState
+execute	torrent_client/algorithms/announcer.py	/^    async def execute(self):$/;"	m	class:Announcer
+execute	torrent_client/algorithms/speed_measurer.py	/^    async def execute(self):$/;"	m	class:SpeedMeasurer
+execute	torrent_client/algorithms/uploader.py	/^    async def execute(self):$/;"	m	class:Uploader
+execute	torrent_client/control/client.py	/^    async def execute(self, action: Callable[[ControlManager], T]) -> T:$/;"	m	class:ControlClient
+file_icon	torrent_gui.py	/^file_icon = load_icon('file')$/;"	v
+file_tree	torrent_client/models.py	/^    def file_tree(self) -> FileTreeNode:$/;"	m	class:DownloadInfo
+files_dropped	torrent_gui.py	/^    files_dropped = pyqtSignal(list)$/;"	v	class:TorrentListWidget
+find_another_daemon	torrent_gui.py	/^async def find_another_daemon(filenames: List[str]) -> bool:$/;"	f
+floor_to	torrent_client/utils.py	/^def floor_to(x: float, ndigits: int) -> float:$/;"	f
+flush	torrent_client/file_structure.py	/^    def flush(self, offset: int, length: int):$/;"	m	class:FileStructure
+format_content	torrent_client/control/formatters.py	/^def format_content(torrent_info: TorrentInfo) -> List[str]:$/;"	f
+format_status	torrent_client/control/formatters.py	/^def format_status(state: TorrentState, long_format: bool) -> List[str]:$/;"	f
+format_title	torrent_client/control/formatters.py	/^def format_title(info: Union[DownloadInfo, TorrentState], long_format: bool) -> List[str]:$/;"	f
+from_compact_form	torrent_client/models.py	/^    def from_compact_form(cls, data: bytes):$/;"	m	class:Peer
+from_dict	torrent_client/models.py	/^    def from_dict(cls, dictionary: OrderedDict):$/;"	m	class:DownloadInfo
+from_dict	torrent_client/models.py	/^    def from_dict(cls, dictionary: OrderedDict):$/;"	m	class:FileInfo
+from_dict	torrent_client/models.py	/^    def from_dict(cls, dictionary: OrderedDict):$/;"	m	class:Peer
+from_file	torrent_client/models.py	/^    def from_file(cls, filename: str, **kwargs):$/;"	m	class:TorrentInfo
+generate_peer_id	torrent_client/models.py	/^def generate_peer_id():$/;"	f
+get_directory	torrent_gui.py	/^def get_directory(directory: Optional[str]):$/;"	f
+get_peer_download_rate	torrent_client/algorithms/downloader.py	/^    def get_peer_download_rate(self, peer: Peer) -> int:$/;"	m	class:Downloader
+get_peer_upload_rate	torrent_client/algorithms/uploader.py	/^    def get_peer_upload_rate(self, peer: Peer) -> int:$/;"	m	class:Uploader
+get_real_piece_length	torrent_client/models.py	/^    def get_real_piece_length(self, index: int) -> int:$/;"	m	class:DownloadInfo
+get_torrents	torrent_client/control/manager.py	/^    def get_torrents(self) -> List[TorrentInfo]:$/;"	m	class:ControlManager
+get_utf8	torrent_client/models.py	/^def get_utf8(dictionary: OrderedDict, key: bytes):$/;"	f
+grouper	torrent_client/utils.py	/^def grouper(arr: T, group_size: int) -> List[T]:$/;"	f
+have	torrent_client/network/peer_tcp_client.py	/^    have = 4$/;"	v	class:MessageType
+host	torrent_client/models.py	/^    def host(self) -> str:$/;"	m	class:Peer
+humanize_size	torrent_client/utils.py	/^def humanize_size(size: float) -> str:$/;"	f
+humanize_speed	torrent_client/utils.py	/^def humanize_speed(speed: int) -> str:$/;"	f
+humanize_time	torrent_client/utils.py	/^def humanize_time(total_seconds: int) -> str:$/;"	f
+import_signals	torrent_client/utils.py	/^def import_signals():$/;"	f
+increase_distrust	torrent_client/models.py	/^    def increase_distrust(self, peer: Peer):$/;"	m	class:DownloadInfo
+interested	torrent_client/network/peer_tcp_client.py	/^    interested = 2$/;"	v	class:MessageType
+interesting_pieces	torrent_client/models.py	/^    def interesting_pieces(self) -> Set[int]:$/;"	m	class:DownloadInfo
+invoke	torrent_client/algorithms/peer_manager.py	/^    def invoke(self):$/;"	m	class:PeerManager
+invoke_state_dumps	torrent_client/control/manager.py	/^    def invoke_state_dumps(self):$/;"	m	class:ControlManager
+is_available	torrent_client/algorithms/peer_manager.py	/^    def is_available(self) -> bool:$/;"	m	class:PeerData
+is_banned	torrent_client/models.py	/^    def is_banned(self, peer: Peer) -> bool:$/;"	m	class:DownloadInfo
+is_free	torrent_client/algorithms/peer_manager.py	/^    def is_free(self) -> bool:$/;"	m	class:PeerData
+join_lines	torrent_client/control/formatters.py	/^def join_lines(lines: Iterable[str]) -> str:$/;"	f
+last_connecting_time	torrent_client/algorithms/peer_manager.py	/^    def last_connecting_time(self) -> int:$/;"	m	class:PeerManager
+last_tracker_client	torrent_client/algorithms/announcer.py	/^    def last_tracker_client(self) -> BaseTrackerClient:$/;"	m	class:Announcer
+length	torrent_client/models.py	/^    def length(self) -> int:$/;"	m	class:FileInfo
+length	torrent_client/models.py	/^    def length(self) -> int:$/;"	m	class:PieceInfo
+load_icon	torrent_gui.py	/^def load_icon(name: str):$/;"	f
+load_state	torrent_client/control/manager.py	/^    def load_state(self):$/;"	m	class:ControlManager
+lock	torrent_client/file_structure.py	/^    def lock(self) -> asyncio.Lock:$/;"	m	class:FileStructure
+logger	torrent_client/control/client.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	torrent_client/control/manager.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	torrent_client/control/server.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	torrent_client/network/peer_tcp_server.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	torrent_client/network/tracker_clients/http.py	/^logger = logging.getLogger(__name__)$/;"	v
+logger	torrent_client/network/tracker_clients/udp.py	/^logger = logging.getLogger(__name__)$/;"	v
+loop	torrent_gui.py	/^    def loop(self) -> asyncio.AbstractEventLoop:$/;"	m	class:ControlManagerThread
+main	torrent_cli.py	/^def main():$/;"	f
+main	torrent_gui.py	/^def main():$/;"	f
+mark_as_downloaded	torrent_client/models.py	/^    def mark_as_downloaded(self):$/;"	m	class:PieceInfo
+mark_downloaded_blocks	torrent_client/models.py	/^    def mark_downloaded_blocks(self, source: Peer, request: BlockRequest):$/;"	m	class:PieceInfo
+md5sum	torrent_client/models.py	/^    def md5sum(self) -> str:$/;"	m	class:FileInfo
+more_peers_requested	torrent_client/algorithms/announcer.py	/^    def more_peers_requested(self) -> asyncio.Event:$/;"	m	class:Announcer
+none	torrent_client/network/tracker_clients/base.py	/^    none = 0$/;"	v	class:EventType
+not_interested	torrent_client/network/peer_tcp_client.py	/^    not_interested = 3$/;"	v	class:MessageType
+pack	torrent_client/network/tracker_clients/udp.py	/^def pack(*data) -> bytes:$/;"	f
+parse_compact_peers_list	torrent_client/network/tracker_clients/base.py	/^def parse_compact_peers_list(data: bytes) -> List[Peer]:$/;"	f
+path	torrent_client/models.py	/^    def path(self) -> List[str]:$/;"	m	class:FileInfo
+pause	torrent_client/control/manager.py	/^    async def pause(self, info_hash: bytes):$/;"	m	class:ControlManager
+peer_choking	torrent_client/network/peer_tcp_client.py	/^    def peer_choking(self):$/;"	m	class:PeerTCPClient
+peer_data	torrent_client/algorithms/peer_manager.py	/^    def peer_data(self) -> Dict[Peer, PeerData]:$/;"	m	class:PeerManager
+peer_interested	torrent_client/network/peer_tcp_client.py	/^    def peer_interested(self):$/;"	m	class:PeerTCPClient
+peer_last_download	torrent_client/models.py	/^    def peer_last_download(self) -> Dict[Peer, float]:$/;"	m	class:SessionStatistics
+peer_last_upload	torrent_client/models.py	/^    def peer_last_upload(self) -> Dict[Peer, float]:$/;"	m	class:SessionStatistics
+peers	torrent_client/network/tracker_clients/base.py	/^    def peers(self) -> List[Peer]:$/;"	m	class:BaseTrackerClient
+piece	torrent_client/network/peer_tcp_client.py	/^    piece = 7$/;"	v	class:MessageType
+piece_count	torrent_client/models.py	/^    def piece_count(self) -> int:$/;"	m	class:DownloadInfo
+piece_hash	torrent_client/models.py	/^    def piece_hash(self) -> bytes:$/;"	m	class:PieceInfo
+piece_owned	torrent_client/network/peer_tcp_client.py	/^    def piece_owned(self) -> Sequence[bool]:$/;"	m	class:PeerTCPClient
+pieces	torrent_client/models.py	/^    def pieces(self) -> List[PieceInfo]:$/;"	m	class:DownloadInfo
+port	torrent_client/models.py	/^    def port(self) -> int:$/;"	m	class:Peer
+port	torrent_client/network/peer_tcp_client.py	/^    port = 9$/;"	v	class:MessageType
+port	torrent_client/network/peer_tcp_server.py	/^    def port(self):$/;"	m	class:PeerTCPServer
+progress	torrent_client/algorithms/downloader.py	/^        progress = pyqtSignal()$/;"	v	class:Downloader
+progress	torrent_client/models.py	/^    def progress(self) -> float:$/;"	m	class:TorrentState
+pyqtSignal	torrent_client/algorithms/downloader.py	/^QObject, pyqtSignal = import_signals()$/;"	v
+pyqtSignal	torrent_client/algorithms/speed_measurer.py	/^QObject, pyqtSignal = import_signals()$/;"	v
+pyqtSignal	torrent_client/algorithms/torrent_manager.py	/^QObject, pyqtSignal = import_signals()$/;"	v
+pyqtSignal	torrent_client/control/manager.py	/^QObject, pyqtSignal = import_signals()$/;"	v
+ratio	torrent_client/models.py	/^    def ratio(self) -> float:$/;"	m	class:TorrentState
+read	torrent_client/file_structure.py	/^    def read(self, offset: int, length: int):$/;"	m	class:FileStructure
+receive_object	torrent_client/control/server.py	/^    async def receive_object(reader: asyncio.StreamReader) -> Any:$/;"	m	class:ControlServer
+recv	torrent_client/network/tracker_clients/udp.py	/^    async def recv(self) -> bytes:$/;"	m	class:DatagramReaderProtocol
+remove	torrent_client/control/manager.py	/^    async def remove(self, info_hash: bytes):$/;"	m	class:ControlManager
+request	torrent_client/network/peer_tcp_client.py	/^    request = 6$/;"	v	class:MessageType
+reset_content	torrent_client/models.py	/^    def reset_content(self):$/;"	m	class:PieceInfo
+reset_run_state	torrent_client/models.py	/^    def reset_run_state(self):$/;"	m	class:DownloadInfo
+reset_run_state	torrent_client/models.py	/^    def reset_run_state(self):$/;"	m	class:PieceInfo
+reset_stats	torrent_client/models.py	/^    def reset_stats(self):$/;"	m	class:DownloadInfo
+resume	torrent_client/control/manager.py	/^    def resume(self, info_hash: bytes):$/;"	m	class:ControlManager
+run	torrent_client/algorithms/downloader.py	/^    async def run(self):$/;"	m	class:Downloader
+run	torrent_client/algorithms/torrent_manager.py	/^    async def run(self):$/;"	m	class:TorrentManager
+run	torrent_client/network/peer_tcp_client.py	/^    async def run(self):$/;"	m	class:PeerTCPClient
+run	torrent_gui.py	/^    def run(self):$/;"	m	class:ControlManagerThread
+run_daemon	torrent_cli.py	/^def run_daemon(_):$/;"	f
+run_in_event_loop	torrent_cli.py	/^def run_in_event_loop(coro_function, args):$/;"	f
+scrape	torrent_client/network/tracker_clients/udp.py	/^    scrape = 2  # TODO: not implemented yet$/;"	v	class:ActionType
+select_files	torrent_client/models.py	/^    def select_files(self, paths: List[List[str]], mode: str):$/;"	m	class:DownloadInfo
+send_have	torrent_client/network/peer_tcp_client.py	/^    def send_have(self, piece_index: int):$/;"	m	class:PeerTCPClient
+send_keep_alive	torrent_client/network/peer_tcp_client.py	/^    def send_keep_alive(self):$/;"	m	class:PeerTCPClient
+send_object	torrent_client/control/server.py	/^    def send_object(obj: Any, writer: asyncio.StreamWriter):$/;"	m	class:ControlServer
+send_request	torrent_client/network/peer_tcp_client.py	/^    def send_request(self, request: BlockRequest, cancel: bool=False):$/;"	m	class:PeerTCPClient
+session_statistics	torrent_client/models.py	/^    def session_statistics(self) -> SessionStatistics:$/;"	m	class:DownloadInfo
+show_handler	torrent_cli.py	/^def show_handler(args):$/;"	f
+single_file_mode	torrent_client/models.py	/^    def single_file_mode(self) -> bool:$/;"	m	class:DownloadInfo
+sources	torrent_client/models.py	/^    def sources(self) -> Set[Peer]:$/;"	m	class:PieceInfo
+start	torrent_client/control/manager.py	/^    async def start(self):$/;"	m	class:ControlManager
+start	torrent_client/control/server.py	/^    async def start(self):$/;"	m	class:ControlServer
+start	torrent_client/network/peer_tcp_server.py	/^    async def start(self):$/;"	m	class:PeerTCPServer
+started	torrent_client/network/tracker_clients/base.py	/^    started = 2$/;"	v	class:EventType
+state	torrent_gui.py	/^    def state(self) -> TorrentState:$/;"	m	class:TorrentListWidgetItem
+state	torrent_gui.py	/^    def state(self, state: TorrentState):$/;"	m	class:TorrentListWidgetItem
+state_changed	torrent_client/algorithms/torrent_manager.py	/^        state_changed = pyqtSignal()$/;"	v	class:TorrentManager
+state_filename	torrent_client/control/manager.py	/^state_filename = os.path.expanduser('~\/.torrent_gui_state')$/;"	v
+status_handler	torrent_cli.py	/^async def status_handler(args):$/;"	f
+status_server_handler	torrent_cli.py	/^def status_server_handler(manager: ControlManager) -> List[TorrentState]:$/;"	f
+stop	torrent_client/algorithms/downloader.py	/^    async def stop(self):$/;"	m	class:Downloader
+stop	torrent_client/algorithms/peer_manager.py	/^    async def stop(self):$/;"	m	class:PeerManager
+stop	torrent_client/algorithms/torrent_manager.py	/^    async def stop(self):$/;"	m	class:TorrentManager
+stop	torrent_client/control/manager.py	/^    async def stop(self):$/;"	m	class:ControlManager
+stop	torrent_client/control/server.py	/^    async def stop(self):$/;"	m	class:ControlServer
+stop	torrent_client/network/peer_tcp_server.py	/^    async def stop(self):$/;"	m	class:PeerTCPServer
+stop	torrent_gui.py	/^    def stop(self):$/;"	m	class:ControlManagerThread
+stop_daemon	torrent_cli.py	/^        def stop_daemon(server: ControlServer):$/;"	f	function:run_daemon	file:
+stop_handler	torrent_cli.py	/^async def stop_handler(_):$/;"	f
+stop_server_handler	torrent_cli.py	/^def stop_server_handler(_: ControlManager):$/;"	f
+stopped	torrent_client/network/tracker_clients/base.py	/^    stopped = 3$/;"	v	class:EventType
+submit_torrent	torrent_gui.py	/^    def submit_torrent(self):$/;"	m	class:TorrentAddingDialog
+suggest_torrents	torrent_gui.py	/^def suggest_torrents(manager: ControlManager, filenames: List[str]):$/;"	f
+torrent_added	torrent_client/control/manager.py	/^        torrent_added = pyqtSignal(TorrentState)$/;"	v	class:ControlManager
+torrent_changed	torrent_client/control/manager.py	/^        torrent_changed = pyqtSignal(TorrentState)$/;"	v	class:ControlManager
+torrent_removed	torrent_client/control/manager.py	/^        torrent_removed = pyqtSignal(bytes)$/;"	v	class:ControlManager
+torrents_suggested	torrent_client/control/manager.py	/^        torrents_suggested = pyqtSignal(list)$/;"	v	class:ControlManager
+total_downloaded	torrent_client/models.py	/^    def total_downloaded(self) -> int:$/;"	m	class:SessionStatistics
+total_size	torrent_client/models.py	/^    def total_size(self) -> int:$/;"	m	class:DownloadInfo
+total_uploaded	torrent_client/models.py	/^    def total_uploaded(self) -> int:$/;"	m	class:SessionStatistics
+try_to_announce	torrent_client/algorithms/announcer.py	/^    async def try_to_announce(self, event: EventType) -> bool:$/;"	m	class:Announcer
+unchoke	torrent_client/network/peer_tcp_client.py	/^    unchoke = 1$/;"	v	class:MessageType
+updated	torrent_client/algorithms/speed_measurer.py	/^        updated = pyqtSignal()$/;"	v	class:SpeedMeasurer
+uploaded	torrent_client/network/peer_tcp_client.py	/^    def uploaded(self):$/;"	m	class:PeerTCPClient
+uploaded_per_session	torrent_client/models.py	/^    def uploaded_per_session(self) -> int:$/;"	m	class:SessionStatistics
+uploading_peer_count	torrent_client/models.py	/^    def uploading_peer_count(self) -> int:$/;"	m	class:SessionStatistics
+waiting_control_action	torrent_gui.py	/^    def waiting_control_action(self) -> bool:$/;"	m	class:TorrentListWidgetItem
+waiting_control_action	torrent_gui.py	/^    def waiting_control_action(self, value: bool):$/;"	m	class:TorrentListWidgetItem
+wrapper	torrent_client/file_structure.py	/^    async def wrapper(self: 'FileStructure', *args, acquire_lock=True, **kwargs):$/;"	f	function:delegate_to_executor	file:
+write	torrent_client/file_structure.py	/^    def write(self, offset: int, data: memoryview):$/;"	m	class:FileStructure
