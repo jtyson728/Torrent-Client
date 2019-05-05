@@ -1,0 +1,15 @@
+#!/usr/bin/env bash
+
+cd ~
+curl https://www.python.org/ftp/python/3.6.5/Python-3.6.5.tgz >> Python.tgz
+tar xzvf Python.tgz
+
+cd Python/
+[[ ! -d ~/.local ]]mkdir ~/.local
+
+./configure --prefix=~/.local/
+make
+make install
+
+cd ~
+rm -rf Python*
