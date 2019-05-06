@@ -1,11 +1,9 @@
+#!/usr/bin/env python
 import xmlrpc.client
+import sys
+import config
 
-with xmlrpc.client.ServerProxy("http://null.cs.rutgers.edu:8000/") as proxy: 
+with xmlrpc.client.ServerProxy("http://localhost:{}".format(config.PORT)) as proxy: 
     print(proxy)
-#    while 1:
-#        cmd = input("Next command \n")
-#    if "respond" in cmd:
-#        msg = cmd.replace("respond ", "")
-#        print(proxy.respond(msg))
 
-    print(proxy.start_daemon)
+print(proxy.start_daemon())
