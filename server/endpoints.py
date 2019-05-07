@@ -12,11 +12,6 @@ p = None
 f_names = {}
 
 
-#  def respond(msg):
-    #  print(msg)
-    #  return("I got the message")
-
-
 # call run_daemon create necessary objects and configs
 def start_daemon():
     global p
