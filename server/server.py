@@ -18,6 +18,8 @@ def main():
     server.register_function(resume, "resume")
     server.register_function(retrieve, "retrieve")
 
+    server.register_function(remove, "remove")
+
     server.register_function(info, "info")
 
     start_daemon()

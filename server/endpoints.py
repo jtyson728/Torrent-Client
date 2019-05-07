@@ -45,15 +45,37 @@ async def add(path):
                     partial(
                         ControlManager.add,
                         torrent_info=TorrentInfo.from_file(path)))
-    await add_torrent(path)
+    try:
+        await add_torrent(path)
+    except Error as e:
+        return -1
 
     torrent_id = ""
-    while torrent_id not in f_names:
+    while torrent_id in f_names:
         torrent_id = str(uuid.uuid4())
 
     f_names[torrent_id] = path
 
     return torrent_id 
+
+
+async def remove(hash_key):
+    global f_names
+    path = f_names.pop(hash_key)
+    if path:
+        async def remove_torrent(path):
+            info = TorrentInfo.from_file(path).download_info.info_hash
+            async with ControlClient() as client:
+                await client.execute(
+                        getattr(ControlManager, "remove"),
+                        info_hash=info)
+        try:
+            await remove_torrent(path)
+        except Error as e:
+            return -1
+        return 0
+    else:
+        return -1
 
 
 # pause a download specified by a specific key
