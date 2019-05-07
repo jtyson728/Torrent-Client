@@ -47,8 +47,8 @@ async def add(path):
                         torrent_info=TorrentInfo.from_file(path)))
     try:
         await add_torrent(path)
-    except Error as e:
-        return -1
+    except Exception as e:
+        return e
 
     torrent_id = ""
     while torrent_id in f_names:
@@ -71,11 +71,11 @@ async def remove(hash_key):
                         info_hash=info)
         try:
             await remove_torrent(path)
-        except Error as e:
-            return -1
-        return 0
+        except Exception as e:
+            return e
+        return path
     else:
-        return -1
+        return FileNotFoundError("Hash key must be invalid")
 
 
 # pause a download specified by a specific key

@@ -12,7 +12,7 @@ def main():
     atexit.register(stop_daemon)
     #  server.register_function(respond, "respond")
 
-    server.register_function(add, "add")
+    server.register_function(add, "add_torrent")
 
     server.register_function(pause, "pause")
     server.register_function(resume, "resume")
