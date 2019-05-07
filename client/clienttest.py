@@ -1,23 +1,24 @@
 #!/usr/bin/env python
-import xmlrpc.client
-import sys
-import config
 import argparse
+import asyncio 
+import config
+import sys
+import xmlrpc.client
 
-proxy = xmlrpc.client.ServerProxy("http://localhost:{}".format(config.PORT))
+proxy = xmlrpc.client.ServerProxy("http://{}:{}".format(config.SERVER_URI, config.PORT))
 
 print(proxy)
 print(proxy.start_daemon())
 
-async def add_torrent(path):
-    hash_key = asyncio.create_task(proxy.add(path))
+async def add_torrent(paths):
+    hash_key = asyncio.create_task(proxy.add(paths))
     await hash_key
-    print("The hash key for the torrent stored at {} is: {}.".format(path, hash_key))
+    print("The hash keys for the torrents stored at {} (respectively) are: {}.".format(paths, hash_keys))
 
-async def remove_torrent(hash_key):
-    path = asyncio.create_task(proxy.remove(hash_key))
+async def remove_torrent(hash_keys):
+    path = asyncio.create_task(proxy.remove(hash_keys))
     await path
-    print("The torrent at path {} with hash key {} has been removed.".format(path, hash_key))
+    print("The torrents at paths {} with hash keys {} has been removed.".format(paths, hash_keys))
 
 def main():
     parser = argparse.ArgumentParser()

@@ -2,8 +2,8 @@ from multiprocessing import Process
 from functools import partial
 import asyncio
 import os
-import torrent_cli
 import uuid
+import utils
 
 from torrent_client.control import ControlManager, ControlClient, ControlServer, DaemonExit, formatters
 from torrent_client.models import TorrentInfo, TorrentState
@@ -20,9 +20,8 @@ f_names = {}
 # call run_daemon create necessary objects and configs
 def start_daemon():
     global p
-    p = Process(
-            target=torrent_cli.run_daemon,
-            args=(None,))
+
+    p = Process(target=utils.run_daemon)
     p.start()
 
 
@@ -36,17 +35,12 @@ def stop_daemon():
 # acquire .torrent file
 # call handler for add
 # return unique key of torrent to client
-async def add(path):
+async def add(paths):
     global f_names
-
-    async def add_torrent(path):
-        async with ControlClient() as client:
-            await client.execute(
-                    partial(
-                        ControlManager.add,
-                        torrent_info=TorrentInfo.from_file(path)))
     try:
-        await add_torrent(path)
+        await add_torrent(
+                paths,
+                config.DOWNLOAD_DIR)
     except Exception as e:
         return e
 
@@ -59,21 +53,17 @@ async def add(path):
     return torrent_id 
 
 
-async def remove(hash_key):
+async def remove(hash_keys):
     global f_names
-    path = f_names.pop(hash_key)
-    if path:
-        async def remove_torrent(path):
-            info = TorrentInfo.from_file(path).download_info.info_hash
-            async with ControlClient() as client:
-                await client.execute(
-                        getattr(ControlManager, "remove"),
-                        info_hash=info)
+    paths = map(
+            f_names.pop(hash_key),
+            hash_keys)
+    if paths:
         try:
-            await remove_torrent(path)
+            await remove_torrent(paths)
         except Exception as e:
             return e
-        return path
+        return list(paths)
     else:
         return FileNotFoundError("Hash key must be invalid")
 

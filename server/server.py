@@ -6,13 +6,14 @@ import asyncio
 import config
 
 def main():
+    # make download dir if it doesn't exist already
+    if not os.path.exists(config.DOWNLOAD_DIR):
+        os.mkdir(config.DOWNLOAD_DIR)
+
     server = SimpleXMLRPCServer(("localhost", config.PORT))
     print("Listening on port {}".format(config.PORT))
 
-    atexit.register(stop_daemon)
-    #  server.register_function(respond, "respond")
-
-    server.register_function(add, "add_torrent")
+    server.register_function(add, "add")
 
     server.register_function(pause, "pause")
     server.register_function(resume, "resume")
@@ -23,6 +24,7 @@ def main():
     server.register_function(info, "info")
 
     start_daemon()
+    atexit.register(stop_daemon)
     server.serve_forever()
 
 if __name__=="__main__":
