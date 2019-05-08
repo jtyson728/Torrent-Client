@@ -1,16 +1,21 @@
 #!/usr/bin/env python
 import argparse
-import asyncio 
+import asyncio
 import config
 import sys
 import xmlrpc.client
+import argh
+from contextlib import closing, suppress
+from functools import partial
+from typing import List
 
-proxy = xmlrpc.client.ServerProxy("http://{}:{}".format(config.SERVER_URI, config.PORT))
+#proxy = xmlrpc.client.ServerProxy("http://{}:{}".format(config.SERVER_URI, config.PORT))
 
-print(proxy)
-print(proxy.start_daemon())
+#print(proxy)
+#print(proxy.start_daemon())
 
-async def add_torrent(paths):
+def add_torrent(paths):
+    print("In add")
     hash_key = asyncio.create_task(proxy.add(paths))
     await hash_key
     print("The hash keys for the torrents stored at {} (respectively) are: {}.".format(paths, hash_keys))
@@ -22,24 +27,16 @@ async def remove_torrent(hash_keys):
 
 def main():
     parser = argparse.ArgumentParser()
-    parser.add_argument(
-            "add",
-            help="Add a torrent file to the server",
-            type=str)
-
-    parser.add_argument(
-            "remove",
-            help="Remove a torrent on the server",
-            type=str)
+    subparsers = parser.add_subparsers()
+    add_parser = subparsers.add_parser("add", help="Add a torrent file to the server")
+    add_parser.set_defaults(func=add)
+    add_parser.add_parser('filenames', nargs='+', help='Torrent file names')
+    #subparser = subparsers.add_argument("remove", help="Remove a torrent on the server", type=str)
 
 
     args = parser.parse_args()
-    if args.add:
-        # execute add functionality
-    elif args.remove:
-        # execute remove functionality
+    args.func(args)
 
-    return 0
-
-if __name__=="__main__":
+if __name__ == "__main__":
     main()
+
