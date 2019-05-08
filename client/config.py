@@ -1,2 +1,2 @@
-PORT = 8000
+PORT = 12000
 SERVER_URI = "localhost"
