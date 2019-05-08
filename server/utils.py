@@ -76,4 +76,3 @@ async def remove_torrent(paths):
                         ControlManager.remove,
                         torrent_info=info))
 
-

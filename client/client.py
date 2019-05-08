@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+from functools import partial
 import argparse
 import asyncio 
 import config
@@ -10,34 +11,50 @@ proxy = xmlrpc.client.ServerProxy("http://{}:{}".format(config.SERVER_URI, confi
 print(proxy)
 print(proxy.start_daemon())
 
-async def add_torrent(paths):
-    hash_key = asyncio.create_task(proxy.add(paths))
+async def add(args):
+    hash_key = asyncio.create_task(proxy.add(args.filenames))
     await hash_key
     print("The hash keys for the torrents stored at {} (respectively) are: {}.".format(paths, hash_keys))
 
-async def remove_torrent(hash_keys):
-    path = asyncio.create_task(proxy.remove(hash_keys))
-    await path
-    print("The torrents at paths {} with hash keys {} has been removed.".format(paths, hash_keys))
+async def remove(args):
+    paths = asyncio.create_task(proxy.remove(args.hash_keys))
+    await paths
+    print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
 
 def main():
-    parser = argparse.ArgumentParser()
-    parser.add_argument(
+    parser = argparse.ArgumentParser(description="A client for the torrent RPC server (CLI)")
+    
+    # subparser for add
+    subparser = subparsers.add_parser(
             "add",
-            help="Add a torrent file to the server",
-            type=str)
+            help="Add a torrent to the server")
 
-    parser.add_argument(
+    subparser.add_argument(
+            "filenames",
+            nargs="+",
+            help="Torrent file names")
+
+    subparser.set_defaults(func=partial(asyncio.run, add))
+
+    subparser = subparsers.add_parser(
             "remove",
-            help="Remove a torrent on the server",
-            type=str)
+            help="Remove a torrent from the server with hash key")
 
+    subparser.add_argument(
+            "hash_keys",
+            nargs="+",
+            help="Hash keys of torrents to remove")
 
-    args = parser.parse_args()
-    if args.add:
-        # execute add functionality
-    elif args.remove:
-        # execute remove functionality
+    subparser.set_defaults(func=partial(asyncio.run, remove))
+
+    arguments = parser.parse_args()
+
+    try:
+        # try to run appropriate function
+        arguments.func(arguments)
+    except Exception as e:
+        print("Exception occurred: {}".format(e))
+        return -1
 
     return 0
 

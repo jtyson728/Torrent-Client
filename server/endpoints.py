@@ -1,29 +1,26 @@
 from multiprocessing import Process
 from functools import partial
+from utils import *
 import asyncio
 import os
 import uuid
-import utils
 
 from torrent_client.control import ControlManager, ControlClient, ControlServer, DaemonExit, formatters
 from torrent_client.models import TorrentInfo, TorrentState
 
-p = None
 f_names = {}
 
 
 # call run_daemon create necessary objects and configs
 def start_daemon():
-    global p
-
-    p = Process(target=utils.run_daemon)
+    p = Process(target=run_daemon)
     p.start()
+    return p
 
 
 # supposed to exit from server
 # stop long-running process
-def stop_daemon():
-    global p
+def stop_daemon(p):
     p.terminate()
 
 
@@ -44,7 +41,6 @@ async def add(paths):
         torrent_id = str(uuid.uuid4())
 
     f_names[torrent_id] = path
-
     return torrent_id 
 
 
@@ -64,12 +60,12 @@ async def remove(hash_keys):
 
 
 # pause a download specified by a specific key
-def pause():
+async def pause():
     return None
 
 
 # resume a download specified by a specific key
-def resume():
+async def resume():
     return None
 
 

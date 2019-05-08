@@ -1,5 +1,6 @@
 #!/usr/bin/env python
 from xmlrpc.server import SimpleXMLRPCServer
+from functools import partial
 from endpoints import *
 import atexit
 import asyncio
@@ -20,11 +21,10 @@ def main():
     server.register_function(retrieve, "retrieve")
 
     server.register_function(remove, "remove")
-
     server.register_function(info, "info")
 
-    start_daemon()
-    atexit.register(stop_daemon)
+    proc = start_daemon()
+    atexit.register(partial(stop_daemon, proc))
     server.serve_forever()
 
 if __name__=="__main__":
