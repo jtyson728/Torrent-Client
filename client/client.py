@@ -8,23 +8,17 @@ import xmlrpc.client
 
 proxy = xmlrpc.client.ServerProxy("http://{}:{}".format(config.SERVER_URI, config.PORT))
 
-print(proxy)
+#  print(proxy)
 #  print(proxy.start_daemon())
 
-async def add(args):
-    print("Going inside add")
-    hash_key = asyncio.create_task(proxy.add(args.filenames))
-    await hash_key
-    print("The hash keys for the torrents stored at {} (respectively) are: {}.".format(paths, hash_keys))
+def add(args):
+    hash_keys = proxy.add(args.filenames)
+    print("The hash keys for the torrents stored at {} (respectively) are: {}.".format(args.filenames, hash_keys))
 
-async def remove(args):
-    paths = asyncio.create_task(proxy.remove(args.hash_keys))
-    await paths
+def remove(args):
+    print(args)
+    paths = proxy.remove(args.hash_keys)
     print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
-
-def run(coro, args):
-    loop = asyncio.get_event_loop()
-    return loop.run_until_complete(coro(args))
 
 def main():
     parser = argparse.ArgumentParser(description="A client for the torrent RPC server (CLI)")
@@ -43,7 +37,9 @@ def main():
             "filenames",
             nargs="+",
             help="Torrent file names")
+
     subparser.set_defaults(func=partial(run, add))
+    subparser.set_defaults(func=add)
 
     subparser = subparsers.add_parser(
             "remove",
@@ -53,7 +49,9 @@ def main():
             "hash_keys",
             nargs="+",
             help="Hash keys of torrents to remove")
+
     subparser.set_defaults(func=partial(run, remove))
+    subparser.set_defaults(func=remove)
 
     arguments = parser.parse_args()
 

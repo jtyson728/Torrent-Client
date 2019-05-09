@@ -52,9 +52,21 @@ def run_daemon():
         loop.run_forever()
 
 
+<<<<<<< HEAD
 async def add_torrent(paths, download_dir):
     torrents = map(
             lambda path: TorrentInfo.from_file(path, download_dir),
+=======
+# require that it already be implemented with partial
+def run_async(coro):
+    loop = asyncio.get_event_loop()
+    return loop.run_until_complete(coro())
+
+
+async def add_torrent(paths, download_dir):
+    torrents = map(
+            lambda path: TorrentInfo.from_file(path, download_dir=download_dir),
+>>>>>>> some commit
             paths)
     async with ControlClient() as client:
         for info in torrents:
@@ -64,9 +76,15 @@ async def add_torrent(paths, download_dir):
                         torrent_info=info))
 
 
+<<<<<<< HEAD
 async def remove_torrent(paths):
     torrents = map(
             lambda path: TorrentInfo.from_file(path, download_dir),
+=======
+async def remove_torrent(paths, download_dir):
+    torrents = map(
+            lambda path: TorrentInfo.from_file(path, download_dir=download_dir),
+>>>>>>> some commit
             paths)
     
     async with ControlClient() as client:

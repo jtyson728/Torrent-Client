@@ -2,11 +2,13 @@ from multiprocessing import Process
 from functools import partial
 from utils import *
 import asyncio
+import config
 import os
 import uuid
 
 from torrent_client.control import ControlManager, ControlClient, ControlServer, DaemonExit, formatters
 from torrent_client.models import TorrentInfo, TorrentState
+
 
 f_names = {}
 
@@ -27,31 +29,38 @@ def stop_daemon(p):
 # acquire .torrent file
 # call handler for add
 # return unique key of torrent to client
-async def add(paths):
+def add(paths):
     global f_names
     try:
-        await add_torrent(
-                paths,
-                config.DOWNLOAD_DIR)
+        run_async(partial(
+            add_torrent,
+            paths,
+            config.DOWNLOAD_DIR))
     except Exception as e:
+        print("Exception occurred: {}".format(e))
         return e
 
-    torrent_id = ""
-    while torrent_id in f_names:
+    torrent_ids = []
+    for path in paths:
         torrent_id = str(uuid.uuid4())
+        while torrent_id in f_names:
+            torrent_id = str(uuid.uuid4())
 
-    f_names[torrent_id] = path
-    return torrent_id 
+        torrent_ids.append(torrent_id)
+        f_names[torrent_id] = path
+    return torrent_ids
 
 
-async def remove(hash_keys):
+def remove(hash_keys):
     global f_names
     paths = map(
-            f_names.pop(hash_key),
+            lambda hash_key: f_names.pop(hash_key),
             hash_keys)
     if paths:
         try:
-            await remove_torrent(paths)
+            run_async(partial(
+                remove_torrent,
+                paths))
         except Exception as e:
             return e
         return list(paths)
@@ -60,12 +69,12 @@ async def remove(hash_keys):
 
 
 # pause a download specified by a specific key
-async def pause():
+def pause():
     return None
 
 
 # resume a download specified by a specific key
-async def resume():
+def resume():
     return None
 
 
