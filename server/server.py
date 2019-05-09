@@ -20,14 +20,28 @@ def main():
 
     print("Listening on port {}".format(config.PORT))
 
-    server.register_function(add, "add")
+    f_names = dict()
 
-    server.register_function(pause, "pause")
-    server.register_function(resume, "resume")
-    server.register_function(retrieve, "retrieve")
+    server.register_function(
+            partial(add, f_names),
+            "add")
 
-    server.register_function(remove, "remove")
-    server.register_function(info, "info")
+    server.register_function(
+            partial(pause, f_names),
+            "pause")
+    server.register_function(
+            partial(resume, f_names),
+            "resume")
+    server.register_function(
+            partial(retrieve, f_names),
+            "retrieve")
+
+    server.register_function(
+            partial(remove, f_names),
+            "remove")
+    server.register_function(
+            partial(info, f_names),
+            "info")
 
     server.serve_forever()
 

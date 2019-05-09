@@ -9,8 +9,6 @@ import uuid
 from torrent_client.control import ControlManager, ControlClient, ControlServer, DaemonExit, formatters
 from torrent_client.models import TorrentInfo, TorrentState
 
-f_names = {}
-
 
 # call run_daemon create necessary objects and configs
 def start_daemon():
@@ -28,8 +26,7 @@ def stop_daemon(p):
 # acquire .torrent file
 # call handler for add
 # return unique key of torrent to client
-def add(paths):
-    global f_names
+def add(f_names, paths):
     try:
         run_async(partial(
             add_torrent,
@@ -50,8 +47,7 @@ def add(paths):
     return torrent_ids
 
 
-def remove(hash_keys):
-    global f_names
+def remove(f_names, hash_keys):
     paths = map(
             lambda hash_key: f_names.pop(hash_key),
             hash_keys)
@@ -83,7 +79,6 @@ def retrieve():
 
 
 # displays info on the torrent that you are downloading
-def info(hash_key):
-    global f_names
+def info(f_names, hash_key):
     f_name = f_names[hash_key]
     return None
