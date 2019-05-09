@@ -42,6 +42,14 @@ def main():
     server.register_function(
             partial(info, f_names),
             "info")
+    server.register_function(add, "add")
+
+    server.register_function(pause, "pause")
+    server.register_function(resume, "resume")
+    server.register_function(retrieve, "retrieve")
+
+    server.register_function(remove, "remove")
+    server.register_function(info, "info")
 
     server.serve_forever()
 

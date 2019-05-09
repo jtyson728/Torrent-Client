@@ -1,6 +1,7 @@
 import asyncio
 import os
 import signal
+import sys
 from contextlib import closing, suppress
 from functools import partial
 from typing import List
@@ -16,6 +17,7 @@ async def check_daemon_absence():
         pass
     else:
         raise RuntimeError('The daemon is already running')
+        sys.exit(-1)
 
 
 def run_daemon():

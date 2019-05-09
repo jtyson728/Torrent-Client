@@ -10,6 +10,12 @@ from torrent_client.control import ControlManager, ControlClient, ControlServer,
 from torrent_client.models import TorrentInfo, TorrentState
 
 
+<<<<<<< HEAD
+=======
+f_names = {}
+
+
+>>>>>>> b6014610b2dbb9b74236700d1dd3674d6f290096
 # call run_daemon create necessary objects and configs
 def start_daemon():
     p = Process(target=run_daemon)
@@ -26,7 +32,12 @@ def stop_daemon(p):
 # acquire .torrent file
 # call handler for add
 # return unique key of torrent to client
+<<<<<<< HEAD
 def add(f_names, paths):
+=======
+def add(paths):
+    global f_names
+>>>>>>> b6014610b2dbb9b74236700d1dd3674d6f290096
     try:
         run_async(partial(
             add_torrent,
@@ -47,7 +58,12 @@ def add(f_names, paths):
     return torrent_ids
 
 
+<<<<<<< HEAD
 def remove(f_names, hash_keys):
+=======
+def remove(hash_keys):
+    global f_names
+>>>>>>> b6014610b2dbb9b74236700d1dd3674d6f290096
     paths = map(
             lambda hash_key: f_names.pop(hash_key),
             hash_keys)
@@ -79,6 +95,11 @@ def retrieve():
 
 
 # displays info on the torrent that you are downloading
+<<<<<<< HEAD
 def info(f_names, hash_key):
+=======
+def info(hash_key):
+    global f_names
+>>>>>>> b6014610b2dbb9b74236700d1dd3674d6f290096
     f_name = f_names[hash_key]
     return None
