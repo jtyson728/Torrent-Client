@@ -83,4 +83,28 @@ async def remove_torrent(paths, download_dir):
                     partial(
                         ControlManager.remove,
                         info_hash=info.download_info.info_hash))
+async def pause_torrent(paths, download_dir):
+    torrents = map(
+            lambda path: TorrentInfo.from_file(path, download_dir=download_dir),
+            paths)
+    
+    async with ControlClient() as client:
+        for info in torrents:
+            await client.execute(
+                    partial(
+                        ControlManager.pause,
+                        info_hash=info.download_info.info_hash))
+
+async def resume_torrent(paths, download_dir):
+    torrents = map(
+            lambda path: TorrentInfo.from_file(path, download_dir=download_dir),
+            paths)
+    
+    async with ControlClient() as client:
+        for info in torrents:
+            await client.execute(
+                    partial(
+                        ControlManager.resume,
+                        info_hash=info.download_info.info_hash))
+
 

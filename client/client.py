@@ -27,6 +27,24 @@ def remove(args):
     else:
         print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
 
+def pause(args):
+    print(args)
+    paths = proxy.pause(args.hash_keys)
+    if isinstance(paths, Exception):
+        print("Exception occurred: {}".format(paths))
+    else:
+        print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
+
+def resume(args):
+    print(args)
+    paths = proxy.resume(args.hash_keys)
+    if isinstance(paths, Exception):
+        print("Exception occurred: {}".format(paths))
+    else:
+        print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
+
+
+
 
 def main():
     parser = argparse.ArgumentParser(description="A client for the torrent RPC server (CLI)")
@@ -58,6 +76,27 @@ def main():
             help="Hash keys of torrents to remove")
 
     subparser.set_defaults(func=remove)
+
+	subparser = subparsers.add_parser(
+			"pause",
+			help="Pause a torrent that is currently downloading on the server with hash key")
+
+	subparser.add_argument(
+			"hask_keys",
+			nargs="+",
+			help="Hash keys of torrents to remove")
+	subparser.set_defaults(func=pause)
+
+subparser = subparsers.add_parser(
+			"resume",
+			help="Resume a torrent that is currently paused on the server with hash key")
+
+	subparser.add_argument(
+			"hask_keys",
+			nargs="+",
+			help="Hash keys of torrents to remove")
+	subparser.set_defaults(func=pause)
+
 
     arguments = parser.parse_args()
     try:

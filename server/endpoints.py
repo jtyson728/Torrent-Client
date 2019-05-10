@@ -93,13 +93,48 @@ def remove(f_names, hash_keys):
 
 
 # pause a download specified by a specific key
-def pause():
-    return None
-
+def pause(f_names, hash_keys):
+    print(hash_keys)
+    paths = list(map(
+                lambda hash_key: f_names.get(hash_key),
+                hash_keys))
+    print(paths)
+    #  import pdb; pdb.set_trace()
+    if paths:
+        try:
+            run_async(partial(
+                pause_torrent,
+                paths,
+                config.DOWNLOAD_DIR))
+        except Exception as e:
+            print("Exception occurred: {}".format(e))
+            return e
+        return list(paths)
+    else:
+        return FileNotFoundError("Hash key must be invalid")
 
 # resume a download specified by a specific key
-def resume():
-    return None
+def resume(f_names, hash_keys):
+    print(hash_keys)
+    paths = list(map(
+                lambda hash_key: f_names.get(hash_key),
+                hash_keys))
+    print(paths)
+    #  import pdb; pdb.set_trace()
+    if paths:
+        try:
+            run_async(partial(
+                resume_torrent,
+                paths,
+                config.DOWNLOAD_DIR))
+        except Exception as e:
+            print("Exception occurred: {}".format(e))
+            return e
+        return list(paths)
+    else:
+        return FileNotFoundError("Hash key must be invalid")
+
+
 
 
 # retrieve downloaded file on client side
