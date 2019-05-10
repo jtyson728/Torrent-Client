@@ -12,45 +12,35 @@ def main():
     if not os.path.exists(config.DOWNLOAD_DIR):
         os.mkdir(config.DOWNLOAD_DIR)
 
-    proc = start_daemon()
-    atexit.register(partial(stop_daemon, proc))
+    proc, file_table = start_server()
+    atexit.register(destroy_server, proc, file_table)
 
     server = SimpleXMLRPCServer(("localhost", config.PORT),
             requestHandler=SimpleXMLRPCRequestHandler)
 
     print("Listening on port {}".format(config.PORT))
 
-    f_names = dict()
-
     server.register_function(
-            partial(add, f_names),
+            partial(add, file_table),
             "add")
 
     server.register_function(
-            partial(pause, f_names),
+            partial(pause, file_table),
             "pause")
     server.register_function(
-            partial(resume, f_names),
+            partial(resume, file_table),
             "resume")
     server.register_function(
-            partial(retrieve, f_names),
+            partial(retrieve, file_table),
             "retrieve")
 
     server.register_function(
-            partial(remove, f_names),
+            partial(remove, file_table),
             "remove")
     server.register_function(
-            partial(info, f_names),
+            partial(info, file_table),
             "info")
-    server.register_function(add, "add")
-
-    server.register_function(pause, "pause")
-    server.register_function(resume, "resume")
-    server.register_function(retrieve, "retrieve")
-
-    server.register_function(remove, "remove")
-    server.register_function(info, "info")
-
+        
     server.serve_forever()
 
 if __name__=="__main__":

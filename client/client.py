@@ -18,17 +18,15 @@ def add(args):
     else:
         print("The hash keys for the torrents stored at {} (respectively) are: {}.".format(args.filenames, hash_keys))
 
+
 def remove(args):
+    print(args)
     paths = proxy.remove(args.hash_keys)
     if isinstance(paths, Exception):
         print("Exception occurred: {}".format(paths))
     else:
         print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
 
-def remove(args):
-    print(args)
-    paths = proxy.remove(args.hash_keys)
-    print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
 
 def main():
     parser = argparse.ArgumentParser(description="A client for the torrent RPC server (CLI)")
@@ -70,6 +68,7 @@ def main():
         return -1
 
     return 0
+
 
 if __name__=="__main__":
     main()

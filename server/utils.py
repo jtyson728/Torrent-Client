@@ -82,5 +82,5 @@ async def remove_torrent(paths, download_dir):
             await client.execute(
                     partial(
                         ControlManager.remove,
-                        torrent_info=info))
+                        info_hash=info.download_info.info_hash))
 

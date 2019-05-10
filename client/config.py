@@ -1,2 +1,2 @@
 PORT = 12000
-SERVER_URI = "localhost"
+SERVER_URI = "cpp.cs.rutgers.edu"
