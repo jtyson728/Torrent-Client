@@ -42,7 +42,7 @@ def destroy_server(p, f_names):
         with open(keys_path, "w+") as keys_file:
             json.dump(f_names, keys_file)
  
-    shutil.rmtree(config.DOWNLOAD_DIR) 
+    #  shutil.rmtree(config.DOWNLOAD_DIR)
 
 
 # acquire .torrent file

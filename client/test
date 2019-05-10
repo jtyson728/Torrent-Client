@@ -1,3 +1,0 @@
-#!/usr/bin/env bash
-
-./client.py add $(realpath ../server/samples/debian-8.3.0-i386-netinst.iso.torrent)

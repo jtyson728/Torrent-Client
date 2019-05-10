@@ -6,7 +6,7 @@ import config
 import sys
 import xmlrpc.client
 
-proxy = xmlrpc.client.ServerProxy("http://{}:{}".format(config.SERVER_URI, config.PORT))
+proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(config.SERVER_URI, config.PORT))
 
 #  print(proxy)
 #  print(proxy.start_daemon())

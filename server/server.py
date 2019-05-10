@@ -7,6 +7,9 @@ import asyncio
 import config
 
 
+class RequestHandler(SimpleXMLRPCRequestHandler):
+    rpc_paths = ("/RPC2",)
+
 def main():
     # make download dir if it doesn't exist already
     if not os.path.exists(config.DOWNLOAD_DIR):
@@ -15,8 +18,8 @@ def main():
     proc, file_table = start_server()
     atexit.register(destroy_server, proc, file_table)
 
-    server = SimpleXMLRPCServer(("localhost", config.PORT),
-            requestHandler=SimpleXMLRPCRequestHandler)
+    server = SimpleXMLRPCServer((config.HOST, config.PORT),
+            requestHandler=RequestHandler)
 
     print("Listening on port {}".format(config.PORT))
 
