@@ -1,0 +1,21 @@
+!_TAG_FILE_FORMAT	2	/extended format; --format=1 will not append ;" to lines/
+!_TAG_FILE_SORTED	1	/0=unsorted, 1=sorted, 2=foldcase/
+!_TAG_OUTPUT_MODE	u-ctags	/u-ctags or e-ctags/
+!_TAG_PROGRAM_AUTHOR	Universal Ctags Team	//
+!_TAG_PROGRAM_NAME	Universal Ctags	/Derived from Exuberant Ctags/
+!_TAG_PROGRAM_URL	https://ctags.io/	/official site/
+!_TAG_PROGRAM_VERSION	0.0.0	/45968eff/
+NETID	config.py	/^NETID = "hra25"$/;"	v
+PASSWORD	config.py	/^PASSWORD = "H@ri281999"$/;"	v
+SERVER_PORT	config.py	/^SERVER_PORT = 12000$/;"	v
+SERVER_URI	config.py	/^SERVER_URI = "cpp.cs.rutgers.edu"$/;"	v
+TORRENT_DIR	config.py	/^TORRENT_DIR = "\/ilab\/users\/{}\/CS314_Final\/server\/.torrents\/".format(NETID)$/;"	v
+add	client.py	/^def add(args):$/;"	f
+createSSHClient	utils.py	/^def createSSHClient(server, port, user, password):$/;"	f
+info	client.py	/^def info(args):$/;"	f
+main	client.py	/^def main():$/;"	f
+pause	client.py	/^def pause(args):$/;"	f
+proxy	client.py	/^proxy = xmlrpc.client.ServerProxy("http:\/\/{}:{}\/".format(config.SERVER_URI, config.PORT))$/;"	v
+remove	client.py	/^def remove(args):$/;"	f
+resume	client.py	/^def resume(args):$/;"	f
+ssh	client.py	/^ssh = createSSHClient($/;"	v

@@ -1,17 +1,53 @@
 #!/usr/bin/env python
 from functools import partial
+from paramiko import SSHClient
+from utils import *
+from scp import SCPClient
 import argparse
 import asyncio 
 import config
+import os
+import shutil
 import sys
 import xmlrpc.client
 
 proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(config.SERVER_URI, config.PORT))
 
-#  print(proxy)
-#  print(proxy.start_daemon())
+if config.SERVER_URI != "localhost":
+    ssh = createSSHClient(
+                config.SERVER_URI,
+                config.SERVER_PORT,
+                config.NETID,
+                config.PASSWORD)
+
+def make_subparser(
+        parser,
+        name,
+        callback,
+        arg_name,
+        nargs="+",
+        help_message=""):
+    subparser = subparsers.add_parser(
+            name, 
+            help=help_message)
+
+    subparser.add_argument(
+            arg_name,
+            nargs=nargs,
+            help="")
+
+    subparser.set_defaults(func=callback)
+
 
 def add(args):
+    if config.SERVER_URI != "localhost":   
+        with SCPClient(ssh.get_transport()) as scp:
+            for f_name in args.filenames:
+                base = os.path.basename(f_name)
+                scp.put(
+                        f_name,
+                        os.path.join(config.TORRENT_DIR, base))
+        
     hash_keys = proxy.add(args.filenames)
     if isinstance(hash_keys, Exception):
         print("Exception occurred: {}".format(hash_keys))
@@ -20,23 +56,22 @@ def add(args):
 
 
 def remove(args):
-    print(args)
     paths = proxy.remove(args.hash_keys)
     if isinstance(paths, Exception):
         print("Exception occurred: {}".format(paths))
     else:
         print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
 
+
 def pause(args):
-    print(args)
     paths = proxy.pause(args.hash_keys)
     if isinstance(paths, Exception):
         print("Exception occurred: {}".format(paths))
     else:
         print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
 
+
 def resume(args):
-    print(args)
     paths = proxy.resume(args.hash_keys)
     if isinstance(paths, Exception):
         print("Exception occurred: {}".format(paths))
@@ -44,7 +79,27 @@ def resume(args):
         print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
 
 
+def info(args):
+    for info in proxy.add(args.hash_keys):
+        if isinstance(info, str):
+            print(info)
+        else:
+            print("Exception occurred: {}".format(info))
+            sys.exit(-1)
 
+
+def retrieve(args):
+    is_remote = config.SERVER_URI != "localhost"
+    if is_remote:
+        scp = SCPClient(ssh.get_transport())
+    for path in proxy.retrieve(args.hash_keys):
+        if is_remote:
+            # scp -r each of the directories
+            scp.get(path, recursive=True)
+        else:
+            # normal copy each directory tree
+            shutil.copytree(path, os.getcwd())
+            
 
 def main():
     parser = argparse.ArgumentParser(description="A client for the torrent RPC server (CLI)")
@@ -55,50 +110,44 @@ def main():
             dest="action")
 
     # subparser for add
-    subparser = subparsers.add_parser(
-            "add",
-            help="Add a torrent to the server")
+    make_subparser(
+            parser,
+            name="add",
+            callback=add,
+            arg_name="filenames")     
+        
+    make_subparser(
+            parser,
+            name="remove",
+            callback=remove,
+            arg_name="hash_keys")
 
-    subparser.add_argument(
-            "filenames",
-            nargs="+",
-            help="Torrent file names")
+    make_subparser(
+            parser,
+            name="pause",
+            callback=pause,
+            arg_name="hash_keys")
 
-    subparser.set_defaults(func=add)
+    make_subparser(
+            parser,
+            name="resume",
+            callback=resume,
+            arg_name="hash_keys")
 
-    subparser = subparsers.add_parser(
-            "remove",
-            help="Remove a torrent from the server with hash key")
+    make_subparser(
+            parser,
+            name="info",
+            callback=info,
+            arg_name="hash_keys")
 
-    subparser.add_argument(
-            "hash_keys",
-            nargs="+",
-            help="Hash keys of torrents to remove")
-
-    subparser.set_defaults(func=remove)
-
-	subparser = subparsers.add_parser(
-			"pause",
-			help="Pause a torrent that is currently downloading on the server with hash key")
-
-	subparser.add_argument(
-			"hask_keys",
-			nargs="+",
-			help="Hash keys of torrents to remove")
-	subparser.set_defaults(func=pause)
-
-subparser = subparsers.add_parser(
-			"resume",
-			help="Resume a torrent that is currently paused on the server with hash key")
-
-	subparser.add_argument(
-			"hask_keys",
-			nargs="+",
-			help="Hash keys of torrents to remove")
-	subparser.set_defaults(func=pause)
-
+    make_subparser(
+            parser,
+            name="retrieve",
+            callback=retrieve,
+            arg_name="hash_keys")
 
     arguments = parser.parse_args()
+
     try:
         # try to run appropriate function
         arguments.func(arguments)

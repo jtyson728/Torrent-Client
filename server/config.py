@@ -1,5 +1,5 @@
 import os
 
-HOST = "localhost"
+HOST = "HOSTNAME"
 PORT = 12000
-DOWNLOAD_DIR = os.path.join(os.getcwd(), ".downloads")
+DOWNLOAD_DIR = os.path.join(os.getcwd(), "DONWLOAD_DIR_NAME")

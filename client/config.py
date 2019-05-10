@@ -1,2 +1,6 @@
-SERVER_URI = "cpp.cs.rutgers.edu"
-PORT = 12000
+SERVER_URI = "ILAB_URI"
+SERVER_PORT = 12000
+
+NETID = "YOUR_NETID"
+PASSWORD = "YOUR_ILAB_PASSWORD"
+TORRENT_DIR = "/ilab/users/{}/CS314_Final/server/.torrents/".format(NETID)

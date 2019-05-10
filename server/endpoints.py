@@ -5,12 +5,10 @@ import asyncio
 import config
 import os
 import json
+import re
 import secrets
-import shutil
+import string
 import uuid
-
-from torrent_client.control import ControlManager, ControlClient, ControlServer, DaemonExit, formatters
-from torrent_client.models import TorrentInfo, TorrentState
 
 
 # call run_daemon create necessary objects and configs
@@ -18,7 +16,10 @@ def start_server():
     p = Process(target=run_daemon)
     p.start()
 
-    keys_path = os.path.join(os.getcwd(), "hash_keys.json")
+    keys_path = os.path.join(
+            os.getcwd(),
+            "hash_keys.json")
+
     if os.path.exists(keys_path):
         with open(keys_path) as keys_file:
             return (p, json.load(keys_file))
@@ -34,7 +35,10 @@ def destroy_server(p, f_names):
     except:
         print("Process already exited.")
 
-    keys_path = os.path.join(os.getcwd(), "hash_keys.json")
+    keys_path = os.path.join(
+            os.getcwd(),
+            "hash_keys.json")
+
     if f_names:
         if os.path.exists(keys_path):
             os.remove(keys_path)
@@ -42,8 +46,6 @@ def destroy_server(p, f_names):
         with open(keys_path, "w+") as keys_file:
             json.dump(f_names, keys_file)
  
-    #  shutil.rmtree(config.DOWNLOAD_DIR)
-
 
 # acquire .torrent file
 # call handler for add
@@ -113,6 +115,7 @@ def pause(f_names, hash_keys):
     else:
         return FileNotFoundError("Hash key must be invalid")
 
+
 # resume a download specified by a specific key
 def resume(f_names, hash_keys):
     print(hash_keys)
@@ -135,14 +138,28 @@ def resume(f_names, hash_keys):
         return FileNotFoundError("Hash key must be invalid")
 
 
-
-
 # retrieve downloaded file on client side
-def retrieve():
-    return None
+# returns paths (on the server) to directories containing the completed torrents
+def retrieve(f_names, hash_keys):
+    paths = []
+    for key in hash_keys:
+        path = f_names.get(key)
+        if path:
+            paths.append(path.replace(".torrent", "/"))
+        else:
+            return FileNotFoundError("Hash key {} is invalid".format(key))
+
+    return paths
 
 
 # displays info on the torrent that you are downloading
-def info(f_names, hash_key):
-    f_name = f_names[hash_key]
-    return None
+def info(f_names, hash_keys):
+    for key in hash_keys:
+        path = f_names.get(key)
+        if path:
+            torrent_info = TorrentInfo.from_file(path, download_dir=None)
+            content_description = formatters.join_lines(
+                    formatters.format_title(torrent_info, True) + formatters.format_content(torrent_info))
+            yield content_description
+        else:
+            yield FileNotFoundError("Hash key {} is invalid".format(key))
