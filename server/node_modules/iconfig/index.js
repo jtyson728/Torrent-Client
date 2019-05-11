@@ -1,0 +1,1 @@
+module.exports = process.env.ICONFIG_COV ? require('./lib-cov/iconfig') : require('./lib/iconfig');

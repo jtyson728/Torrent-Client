@@ -10,21 +10,59 @@ import os
 import shutil
 import sys
 import xmlrpc.client
+import time
 
-proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(config.SERVER_URI, config.PORT))
+class ProxyInterface(xmlrpc.client.Transport):
+	proxy = None
 
-if config.SERVER_URI != "localhost":
-    ssh = createSSHClient(
-                config.SERVER_URI,
-                config.SERVER_PORT,
-                config.NETID,
-                config.PASSWORD)
+	def connect_ssh(self):
+		if config.SERVER_URI != "localhost":
+    		#ssh = createSSHClient(config.SERVER_URI, config.SERVER_PORT, config.NETID, config.PASSWORD)
+			pass
+			
+	def set_proxy(self, host, port=8001, headers=None):
+		proxy = host, port
+		proxy_headers = headers
+		proxy = xmlrpc.client.ServerProxy()
 
+	def make_connection(self, proxy):
+		connection = https.client.HTTPConnection(proxy)
+		connection.set_tunnel(host)
+		connection = host
+
+
+def python_logo():
+	pass
+
+
+def main():
+	#transport = ProxyInterface()
+	try:
+		proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(config.SERVER_URI, config.SERVER_PORT))
+		time.sleep(3)
+		print(proxy)
+		
+	except xmlrpc.client.Fault as err:
+		print("a Fault error ocurred.")
+		print("Fault code: %d", err.faultCode)
+		print("Fault Message: %s", err.faultString)
+	
+	
+	with open("lol.txt", "wb") as handle:
+		handle.write(proxy.python_logo().data)
+	
+	#try:
+		#proxy.add()
+	
+
+
+'''
 def make_subparser(
         parser,
         name,
         callback,
         arg_name,
+		subparsers,
         nargs="+",
         help_message=""):
     subparser = subparsers.add_parser(
@@ -40,7 +78,7 @@ def make_subparser(
 
 
 def add(args):
-    if config.SERVER_URI != "localhost":   
+    if config.SERVER_URI.lower() != "localhost":   
         with SCPClient(ssh.get_transport()) as scp:
             for f_name in args.filenames:
                 base = os.path.basename(f_name)
@@ -114,37 +152,43 @@ def main():
             parser,
             name="add",
             callback=add,
-            arg_name="filenames")     
+            arg_name="filenames",
+			subparsers=subparsers)     
         
     make_subparser(
             parser,
             name="remove",
             callback=remove,
-            arg_name="hash_keys")
+            arg_name="hash_keys",
+			subparsers=subparsers)
 
     make_subparser(
             parser,
             name="pause",
             callback=pause,
-            arg_name="hash_keys")
+            arg_name="hash_keys",
+			subparsers=subparsers)
 
     make_subparser(
             parser,
             name="resume",
             callback=resume,
-            arg_name="hash_keys")
+            arg_name="hash_keys",
+			subparsers=subparsers)
 
     make_subparser(
             parser,
             name="info",
             callback=info,
-            arg_name="hash_keys")
+            arg_name="hash_keys",
+			subparsers=subparsers)
 
     make_subparser(
             parser,
             name="retrieve",
             callback=retrieve,
-            arg_name="hash_keys")
+            arg_name="hash_keys",
+			subparsers=subparsers)
 
     arguments = parser.parse_args()
 
@@ -157,6 +201,6 @@ def main():
 
     return 0
 
-
+'''
 if __name__=="__main__":
     main()
