@@ -12,32 +12,14 @@ import sys
 import xmlrpc.client
 import time
 
-class ProxyInterface(xmlrpc.client.Transport):
-	proxy = None
 
-	def connect_ssh(self):
-		if config.SERVER_URI != "localhost":
-    		#ssh = createSSHClient(config.SERVER_URI, config.SERVER_PORT, config.NETID, config.PASSWORD)
-			pass
-			
-	def set_proxy(self, host, port=8001, headers=None):
-		proxy = host, port
-		proxy_headers = headers
-		proxy = xmlrpc.client.ServerProxy()
-
-	def make_connection(self, proxy):
-		connection = https.client.HTTPConnection(proxy)
-		connection.set_tunnel(host)
-		connection = host
-
+proxy = None
 
 def python_logo():
 	pass
 
 def make_subparser(parser, name, callback, arg_name, subparsers, nargs="+", help_message=""): 
-	subparser = subparsers.add_parser(
-		name, 
-		help=help_message)
+	subparser = subparsers.add_parser(name, help=help_message)
 
 	subparser.add_argument(arg_name, nargs=nargs, help="")
 
