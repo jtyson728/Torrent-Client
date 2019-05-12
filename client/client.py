@@ -12,8 +12,19 @@ import sys
 import xmlrpc.client
 import time
 
-
 proxy = None
+
+try:
+	proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(config.SERVER_URI, config.SERVER_PORT))
+	time.sleep(3)
+	#print(proxy)
+		
+except xmlrpc.client.Fault as err:
+	print("a Fault error ocurred.")
+	print("Fault code: %d", err.faultCode)
+	print("Fault Message: %s", err.faultString)
+	sys.exit(-1)
+
 
 def python_logo():
 	pass
@@ -25,13 +36,23 @@ def make_subparser(parser, name, callback, arg_name, subparsers, nargs="+", help
 
 	subparser.set_defaults(func=callback)
 
-
+def push(args):
+	if config.SERVER_URI.lower() != "localhost":
+		pass
+	print(args.filenames)
+	for f_name in args.filenames:
+		with open(f_name, "rb") as fileData:
+			try:
+				proxy.push(f_name, xmlrpc.client.Binary(fileData.read()));
+			except Exception as err:
+				print("There was an exceoption: {}".format(err))
+			
 def add(args):
-	if config.SERVER_URI.lower() != "localhost":   
-		with SCPClient(ssh.get_transport()) as scp:
-			for f_name in args.filenames:
-				base = os.path.basename(f_name)
-				scp.put(f_name, os.path.join(config.TORRENT_DIR, base))
+	#if config.SERVER_URI.lower() != "localhost":   
+	#	with SCPClient(ssh.get_transport()) as scp:
+	#		for f_name in args.filenames:
+	#			base = os.path.basename(f_name)
+	#			scp.put(f_name, os.path.join(config.TORRENT_DIR, base))
         
 	hash_keys = proxy.add(args.filenames)
 	if isinstance(hash_keys, Exception):
@@ -87,51 +108,51 @@ def retrieve(args):
  
 def main():
 	#transport = ProxyInterface()
+	#try:
+		#proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(config.SERVER_URI, config.SERVER_PORT))
+		#time.sleep(3)
+		#print(proxy)
+		
+	#except xmlrpc.client.Fault as err:
+		#print("a Fault error ocurred.")
+		#print("Fault code: %d", err.faultCode)
+		#print("Fault Message: %s", err.faultString)
+		#return
+			
+	#else:
+	print(proxy)
+	parser = argparse.ArgumentParser(description="A client for the torrent RPC server (CLI)")
+
+	subparsers = parser.add_subparsers(
+		description="Specify an action before --help to show parameters for it",
+		metavar="ACTION",
+		dest="action")
+
+	# subparser for add
+	make_subparser(parser, name="add", callback=add, arg_name="filenames", subparsers=subparsers)
+
+	make_subparser(parser, name="remove", callback=remove, arg_name="hash_keys", subparsers=subparsers)
+
+	make_subparser(parser, name="pause", callback=pause, arg_name="hash_keys", subparsers=subparsers)
+
+	make_subparser(parser, name="resume", callback=resume, arg_name="hash_keys", subparsers=subparsers)
+
+	make_subparser(parser, name="info", callback=info, arg_name="hash_keys", subparsers=subparsers)
+
+	make_subparser(parser, name="retrieve", callback=retrieve, arg_name="hash_keys", subparsers=subparsers)
+	
+	make_subparser(parser, name="push", callback=push, arg_name="filenames", subparsers=subparsers)
+		
+	arguments = parser.parse_args()
+
 	try:
-		proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(config.SERVER_URI, config.SERVER_PORT))
-		time.sleep(1)
-		print(proxy)
-		
-	except xmlrpc.client.Fault as err:
-		print("a Fault error ocurred.")
-		print("Fault code: %d", err.faultCode)
-		print("Fault Message: %s", err.faultString)
-	
-	else:
-		with open("lol.txt", "wb") as handle:
-			handle.write(proxy.python_logo().data)
-		parser = argparse.ArgumentParser(description="A client for the torrent RPC server (CLI)")
+		# try to run appropriate function
+		arguments.func(arguments)
+	except Exception as e:
+		print("Exception occurred: {}".format(e))
+		return -1
 
-		subparsers = parser.add_subparsers(
-			description="Specify an action before --help to show parameters for it",
-			metavar="ACTION",
-			dest="action")
-
-		# subparser for add
-		make_subparser(parser, name="add", callback=add, arg_name="filenames", subparsers=subparsers)
-
-		make_subparser(parser, name="remove", callback=remove, arg_name="hash_keys", subparsers=subparsers)
-
-		make_subparser(parser, name="pause", callback=pause, arg_name="hash_keys", subparsers=subparsers)
-
-		make_subparser(parser, name="resume", callback=resume, arg_name="hash_keys", subparsers=subparsers)
-
-		make_subparser(parser, name="info", callback=info, arg_name="hash_keys", subparsers=subparsers)
-
-		make_subparser(parser, name="retrieve", callback=retrieve, arg_name="hash_keys", subparsers=subparsers)
-	
-		make_subparser(parser, name="pull", callback=retrieve, arg_name="hash_keys", subparsers=subparsers)
-		
-		arguments = parser.parse_args()
-
-		try:
-			# try to run appropriate function
-			arguments.func(arguments)
-		except Exception as e:
-			print("Exception occurred: {}".format(e))
-			return -1
-
-		return 0
+	return 0
 
 
 
