@@ -132,7 +132,7 @@ def main():
 
 	make_subparser(parser, name="retrieve", callback=retrieve, arg_name="hash_keys", subparsers=subparsers)
 	
-	make_subparser(parser, name="push", callback=push, arg_name="filenames", subparsers=subparsers)
+	# make_subparser(parser, name="push", callback=push, arg_name="filenames", subparsers=subparsers)
 		
 	arguments = parser.parse_args()
 
