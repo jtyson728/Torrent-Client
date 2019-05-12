@@ -1,6 +1,7 @@
-SERVER_URI = "ILAB_URI"
-SERVER_PORT = 12000
+SERVER_URI = "localhost"
+SERVER_PORT = 45000
 
-NETID = "YOUR_NETID"
-PASSWORD = "YOUR_ILAB_PASSWORD"
-TORRENT_DIR = "/ilab/users/{}/CS314_Final/server/.torrents/".format(NETID)
+NETID = "prinprog"
+PASSWORD = "prinprog"
+# TORRENT_DIR = "/ilab/users/{}/CS314_Final/server/.torrents/".format(NETID)
+TORRENT_DIR = "/home/{}/project/.torrents/".format(NETID)
