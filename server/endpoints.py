@@ -16,9 +16,7 @@ def start_server():
     p = Process(target=run_daemon)
     p.start()
 
-    keys_path = os.path.join(
-            os.getcwd(),
-            "hash_keys.json")
+    keys_path = os.path.join(os.getcwd(), "hash_keys.json")
 
     if os.path.exists(keys_path):
         with open(keys_path) as keys_file:
@@ -52,9 +50,15 @@ def destroy_server(p, f_names):
 # return unique key of torrent to client
 def add(f_names, paths):
 	try:
-		run_async(partial(add_torrent, paths, config.DOWNLOAD_DIR))
+		torrent_paths = []
+		for path in paths:
+			torrent_path = "{}/{}".format(config.TORRENT_CACHE, path)
+			torrent_paths.append(torrent_path)
+
+		run_async(partial(add_torrent, torrent_paths, config.DOWNLOAD_DIR))
+		
 	except Exception as e:
-		print("Exception occurred: {}".format(e))
+		print("Exception occurred in add: {}".format(e))
 		return e
 
 	torrent_ids = []
@@ -70,82 +74,83 @@ def add(f_names, paths):
 
 
 def remove(f_names, hash_keys):
-    print(hash_keys)
-    paths = list(map(
-                lambda hash_key: f_names.pop(hash_key),
-                hash_keys))
-    print(paths)
-    #  import pdb; pdb.set_trace()
-    if paths:
-        try:
-            run_async(partial(
-                remove_torrent,
-                paths,
-                config.DOWNLOAD_DIR))
-        except Exception as e:
-            print("Exception occurred: {}".format(e))
-            return e
-        return list(paths)
-    else:
-        return FileNotFoundError("Hash key must be invalid")
+	print(hash_keys)
+	paths = list(map(
+		lambda hash_key: f_names.pop(hash_key), hash_keys))
+	print(paths)
+	#  import pdb; pdb.set_trace()
+	if paths:
+		try:
+			torrent_paths = []
+			for path in paths:
+				torrent_path = "{}/{}".format(config.TORRENT_CACHE, path)
+				torrent_paths.append(torrent_path)
+			run_async(partial(remove_torrent, paths, config.DOWNLOAD_DIR))
+		except Exception as e:
+			print("Exception occurred: {}".format(e))
+			return e
+		return list(paths)
+	else:
+		return FileNotFoundError("Hash key must be invalid")
 
 
 # pause a download specified by a specific key
 def pause(f_names, hash_keys):
-    print(hash_keys)
-    paths = list(map(
-                lambda hash_key: f_names.get(hash_key),
-                hash_keys))
-    print(paths)
-    #  import pdb; pdb.set_trace()
-    if paths:
-        try:
-            run_async(partial(
-                pause_torrent,
-                paths,
-                config.DOWNLOAD_DIR))
-        except Exception as e:
-            print("Exception occurred: {}".format(e))
-            return e
-        return list(paths)
-    else:
-        return FileNotFoundError("Hash key must be invalid")
+	print(hash_keys)
+	paths = list(map(
+		lambda hash_key: f_names.get(hash_key), hash_keys))
+	print(paths)
+	#  import pdb; pdb.set_trace()
+	if paths:
+		try:
+			torrent_paths = []
+			for path in paths:
+				torrent_path = "{}/{}".format(config.TORRENT_CACHE, path)
+				torrent_paths.append(torrent_path)
+			run_async(partial(pause_torrent, paths, config.DOWNLOAD_DIR))
+		except Exception as e:
+			print("Exception occurred: {}".format(e))
+			return e
+		return list(paths)
+	else:
+		return FileNotFoundError("Hash key must be invalid")
 
 
 # resume a download specified by a specific key
 def resume(f_names, hash_keys):
-    print(hash_keys)
-    paths = list(map(
-                lambda hash_key: f_names.get(hash_key),
-                hash_keys))
-    print(paths)
-    #  import pdb; pdb.set_trace()
-    if paths:
-        try:
-            run_async(partial(
-                resume_torrent,
-                paths,
-                config.DOWNLOAD_DIR))
-        except Exception as e:
-            print("Exception occurred: {}".format(e))
-            return e
-        return list(paths)
-    else:
-        return FileNotFoundError("Hash key must be invalid")
+	print(hash_keys)
+	paths = list(map(
+		lambda hash_key: f_names.get(hash_key), hash_keys))
+	print(paths)
+	#  import pdb; pdb.set_trace()
+	if paths:
+		try:
+			torrent_paths = []
+			for path in paths:
+				torrent_path = "{}/{}".format(config.TORRENT_CACHE, path)
+				torrent_paths.append(torrent_path)
+		
+			run_async(partial(resume_torrent, paths, config.DOWNLOAD_DIR))
+		except Exception as e:
+			print("Exception occurred: {}".format(e))
+			return e
+		return list(paths)
+	else:
+		return FileNotFoundError("Hash key must be invalid")
 
 
 # retrieve downloaded file on client side
 # returns paths (on the server) to directories containing the completed torrents
 def retrieve(f_names, hash_keys):
-    paths = []
-    for key in hash_keys:
-        path = f_names.get(key)
-        if path:
-            paths.append(path.replace(".torrent", "/"))
-        else:
-            return FileNotFoundError("Hash key {} is invalid".format(key))
+	paths = []
+	for key in hash_keys:
+		path = f_names.get(key)
+		if path:
+			paths.append(path.replace(".torrent", "/"))
+		else:
+			return FileNotFoundError("Hash key {} is invalid".format(key))
 
-    return paths
+	return paths
 
 
 # displays info on the torrent that you are downloading

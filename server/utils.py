@@ -61,51 +61,45 @@ def run_async(coro):
 
 
 async def add_torrent(paths, download_dir):
-    torrents = map(
-            lambda path: TorrentInfo.from_file(path, download_dir=download_dir),
-            paths)
-    async with ControlClient() as client:
-        for info in torrents:
-            await client.execute(
-                    partial(
-                        ControlManager.add,
-                        torrent_info=info))
+	print("starting add_torrent... paths: {}".format(paths))
+	torrents = list(map(
+			lambda path: TorrentInfo.from_file(path, download_dir=download_dir), paths))
+	print("finished maping torrents... {}".format(torrents))
+	async with ControlClient() as client:
+		print("In async function...")
+		for info in torrents:
+			print("awaiting execution of 'Controlmanager.add'") #TOFIX Tuple error in here!
+			await client.execute(partial(ControlManager.add, torrent_info=info))
 
 
 async def remove_torrent(paths, download_dir):
-    torrents = map(
-            lambda path: TorrentInfo.from_file(path, download_dir=download_dir),
-            paths)
+	torrents = map(
+            lambda path: TorrentInfo.from_file(path, download_dir=download_dir), paths)
     
-    async with ControlClient() as client:
-        for info in torrents:
-            await client.execute(
-                    partial(
-                        ControlManager.remove,
-                        info_hash=info.download_info.info_hash))
+	async with ControlClient() as client:
+		for info in torrents:
+			await client.execute(partial(
+				ControlManager.remove,
+				info_hash=info.download_info.info_hash))
                     
 
 async def pause_torrent(paths, download_dir):
-    torrents = map(
-            lambda path: TorrentInfo.from_file(path, download_dir=download_dir),
-            paths)
+	torrents = map(
+		lambda path: TorrentInfo.from_file(path, download_dir=download_dir), paths)
     
-    async with ControlClient() as client:
-        for info in torrents:
-            await client.execute(
-                    partial(
-                        ControlManager.pause,
-                        info_hash=info.download_info.info_hash))
+	async with ControlClient() as client:
+		for info in torrents:
+			await client.execute(partial(
+				ControlManager.pause,
+				info_hash=info.download_info.info_hash))
 
 
 async def resume_torrent(paths, download_dir):
-    torrents = map(
-            lambda path: TorrentInfo.from_file(path, download_dir=download_dir),
-            paths)
+	torrents = map(
+		lambda path: TorrentInfo.from_file(path, download_dir=download_dir), paths)
     
-    async with ControlClient() as client:
-        for info in torrents:
-            await client.execute(
-                    partial(
-                        ControlManager.resume,
-                        info_hash=info.download_info.info_hash))
+	async with ControlClient() as client:
+		for info in torrents:
+			await client.execute(partial(
+				ControlManager.resume,
+				info_hash=info.download_info.info_hash))

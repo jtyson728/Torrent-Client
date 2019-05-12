@@ -1,6 +1,6 @@
 #!/usr/bin/env python
 from functools import partial
-from paramiko import SSHClient
+#from paramiko import SSHClient
 from utils import *
 from scp import SCPClient
 import argparse
@@ -17,7 +17,6 @@ proxy = None
 try:
 	proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(config.SERVER_URI, config.SERVER_PORT))
 	time.sleep(3)
-	#print(proxy)
 		
 except xmlrpc.client.Fault as err:
 	print("a Fault error ocurred.")
@@ -48,12 +47,6 @@ def push(args):
 				print("There was an exceoption: {}".format(err))
 			
 def add(args):
-	#if config.SERVER_URI.lower() != "localhost":   
-	#	with SCPClient(ssh.get_transport()) as scp:
-	#		for f_name in args.filenames:
-	#			base = os.path.basename(f_name)
-	#			scp.put(f_name, os.path.join(config.TORRENT_DIR, base))
-        
 	hash_keys = proxy.add(args.filenames)
 	if isinstance(hash_keys, Exception):
 		print("Exception occurred: {}".format(hash_keys))
