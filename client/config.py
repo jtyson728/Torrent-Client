@@ -1,4 +1,4 @@
-SERVER_URI = "localhost"
+SERVER_URI = "tdefton.systems"
 SERVER_PORT = 45000
 
 NETID = "prinprog"
