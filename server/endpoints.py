@@ -51,26 +51,22 @@ def destroy_server(p, f_names):
 # call handler for add
 # return unique key of torrent to client
 def add(f_names, paths):
-    try:
-        run_async(partial(
-            add_torrent,
-            paths,
-            config.DOWNLOAD_DIR))
-    except Exception as e:
-        print("Exception occurred: {}".format(e))
-        return e
+	try:
+		run_async(partial(add_torrent, paths, config.DOWNLOAD_DIR))
+	except Exception as e:
+		print("Exception occurred: {}".format(e))
+		return e
 
-    torrent_ids = []
-    for path in paths:
-        torrent_id = secrets.choice(range(1000, 10000))
-        torrent_id = str(format(torrent_id, "04"))
-        while torrent_id in f_names:
-            torrent_id = secrets.choice(range(1000, 10000))
-            torrent_id = str(format(torrent_id, "04"))
-
-        torrent_ids.append(torrent_id)
-        f_names[torrent_id] = path
-    return torrent_ids
+	torrent_ids = []
+	for path in paths:
+		torrent_id = secrets.choice(range(1000, 10000))
+		torrent_id = str(format(torrent_id, "04"))
+		while torrent_id in f_names:
+			torrent_id = secrets.choice(range(1000, 10000))
+			torrent_id = str(format(torrent_id, "04"))
+			torrent_ids.append(torrent_id)
+		f_names[torrent_id] = path
+	return torrent_ids
 
 
 def remove(f_names, hash_keys):
