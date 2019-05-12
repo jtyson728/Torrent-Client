@@ -63,11 +63,9 @@ def add(f_names, paths):
 
 	torrent_ids = []
 	for path in paths:
-		torrent_id = secrets.choice(range(1000, 10000))
-		torrent_id = str(format(torrent_id, "04"))
+		torrent_id = str(format(secrets.choice(range(1000, 10000)), "04"))
 		while torrent_id in f_names:
-			torrent_id = secrets.choice(range(1000, 10000))
-			torrent_id = str(format(torrent_id, "04"))
+			torrent_id = str(format(secrets.choice(range(1000, 10000)), "04"))
 			torrent_ids.append(torrent_id)
 		f_names[torrent_id] = path
 	return torrent_ids

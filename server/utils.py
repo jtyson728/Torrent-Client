@@ -64,6 +64,7 @@ async def add_torrent(paths, download_dir):
 	print("starting add_torrent... paths: {}".format(paths))
 	torrents = list(map(
 			lambda path: TorrentInfo.from_file(path, download_dir=download_dir), paths))
+
 	print("finished maping torrents... {}".format(torrents))
 	async with ControlClient() as client:
 		print("In async function...")

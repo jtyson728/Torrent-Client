@@ -10,15 +10,14 @@ import asyncio
 import config
 import urllib
 
-
-
-
 class RequestHandler(SimpleXMLRPCRequestHandler):
 	rpc_paths = ("/RPC2",)
+
 
 def send_file():
 	with open("test.txt", "rb") as handle:
 		return xmlrpc.client.Binary(handle.read())
+
 
 def push(f_name, binaryData):
 	tfPath = "{}/{}".format(config.TORRENT_CACHE, f_name)
@@ -28,19 +27,16 @@ def push(f_name, binaryData):
 		
 		
 def main():
-	
 	# make download dir if it doesn't exist already
 	if not os.path.exists(config.DOWNLOAD_DIR):
 		os.mkdir(config.DOWNLOAD_DIR)
 	if not os.path.exists(config.TORRENT_CACHE):
 		os.mkdir(config.TORRENT_CACHE)
 	
-
 	proc, file_table = start_server()
 	atexit.register(destroy_server, proc, file_table)
 
 	server = SimpleXMLRPCServer((config.HOST, config.PORT))
-
 	
 	print("Listening on port {}".format(config.PORT))
 
