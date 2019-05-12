@@ -11,73 +11,50 @@ import string
 import uuid
 
 
-# call run_daemon create necessary objects and configs
-def start_server():
-    p = Process(target=run_daemon)
-    p.start()
-
-    keys_path = os.path.join(os.getcwd(), "hash_keys.json")
-
-    if os.path.exists(keys_path):
-        with open(keys_path) as keys_file:
-            return (p, json.load(keys_file))
-    else:
-        return (p, {})
-
-
-# supposed to exit from server
-# stop long-running process
-def destroy_server(p, f_names):
-    try:
-        p.terminate()
-    except:
-        print("Process already exited.")
-
-    keys_path = os.path.join(
-            os.getcwd(),
-            "hash_keys.json")
-
-    if f_names:
-        if os.path.exists(keys_path):
-            os.remove(keys_path)
-            
-        with open(keys_path, "w+") as keys_file:
-            json.dump(f_names, keys_file)
- 
+def receive_file(f_name, binaryData):
+    tfPath = "{}/{}".format(config.TORRENT_CACHE, f_name)
+    with open(tfPath, "wb") as tFile:
+	    tFile.write(binaryData.data);
+	    return True
+	
 
 # acquire .torrent file
 # call handler for add
 # return unique key of torrent to client
-def add(f_names, paths):
+def add(f_names, files):
 	try:
 		torrent_paths = []
-		for path in paths:
-			torrent_path = "{}/{}".format(config.TORRENT_CACHE, path)
+		for f_name in files:
+			torrent_path = "{}/{}".format(config.TORRENT_CACHE, f_name)
 			torrent_paths.append(torrent_path)
 
 		run_async(partial(add_torrent, torrent_paths, config.DOWNLOAD_DIR))
-		
 	except Exception as e:
 		print("Exception occurred in add: {}".format(e))
 		return e
 
 	torrent_ids = []
-	for path in paths:
+	for f_name in files:
 		torrent_id = str(format(secrets.choice(range(1000, 10000)), "04"))
 		while torrent_id in f_names:
 			torrent_id = str(format(secrets.choice(range(1000, 10000)), "04"))
 			torrent_ids.append(torrent_id)
-		f_names[torrent_id] = path
+
+        torrent_dir = os.path.join(os.getcwd(), config.DOWNLOAD_DIR)
+        torrent-dir = os.path.join(torrent_dir, f_name.replace(".torrent", ""))
+
+		f_names[torrent_id] = [f_name, torrent_dir]
+        torrent_ids.append(torrent_id)
 	return torrent_ids
 
 
 def remove(f_names, hash_keys):
 	print(hash_keys)
-	paths = list(map(
-		lambda hash_key: f_names.pop(hash_key), hash_keys))
-	print(paths)
+    path_lists j= list(map(
+                lambda hash_key: f_names.pop(hash_key),
+                hash_keys))
 	#  import pdb; pdb.set_trace()
-	if paths:
+	if path_lists:
 		try:
 			torrent_paths = []
 			for path in paths:

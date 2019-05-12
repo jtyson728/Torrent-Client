@@ -14,18 +14,40 @@ class RequestHandler(SimpleXMLRPCRequestHandler):
 	rpc_paths = ("/RPC2",)
 
 
-def send_file():
-	with open("test.txt", "rb") as handle:
-		return xmlrpc.client.Binary(handle.read())
+# call run_daemon create necessary objects and configs
+def start_server():
+    p = Process(target=run_daemon)
+    p.start()
+
+    keys_path = os.path.join(os.getcwd(), "hash_keys.json")
+
+    if os.path.exists(keys_path):
+        with open(keys_path) as keys_file:
+            return (p, json.load(keys_file))
+    else:
+        return (p, {})
 
 
-def push(f_name, binaryData):
-	tfPath = "{}/{}".format(config.TORRENT_CACHE, f_name)
-	with open(tfPath, "wb") as tFile:
-		tFile.write(binaryData.data);
-		return True
-		
-		
+# supposed to exit from server
+# stop long-running process
+def destroy_server(p, f_names):
+    try:
+        p.terminate()
+    except:
+        print("Process already exited.")
+
+    keys_path = os.path.join(
+            os.getcwd(),
+            "hash_keys.json")
+
+    if f_names:
+        if os.path.exists(keys_path):
+            os.remove(keys_path)
+            
+        with open(keys_path, "w+") as keys_file:
+            json.dump(f_names, keys_file)
+
+
 def main():
 	# make download dir if it doesn't exist already
 	if not os.path.exists(config.DOWNLOAD_DIR):
@@ -58,9 +80,7 @@ def main():
 	server.register_function(
 		partial(info, file_table), "info")	
 	
-	server.register_function(push, "push")
-	
-	server.register_function(send_file, 'pull')
+	server.register_function(receive_file, "receive_file")
 	
 	server.serve_forever()
 
