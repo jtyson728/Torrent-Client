@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from functools import partial
 #from paramiko import SSHClient
-from utils import *
-from scp import SCPClient
+#  from utils import *
+#  from scp import SCPClient
 import argparse
 import asyncio 
 import config
@@ -15,90 +15,88 @@ import time
 proxy = None
 
 try:
-	proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(config.SERVER_URI, config.SERVER_PORT))
-	time.sleep(3)
+    proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(config.SERVER_URI, config.SERVER_PORT))
+    time.sleep(3)
 		
 except xmlrpc.client.Fault as err:
-	print("a Fault error ocurred.")
-	print("Fault code: %d", err.faultCode)
-	print("Fault Message: %s", err.faultString)
-	sys.exit(-1)
+    print("a Fault error ocurred.")
+    print("Fault code: %d", err.faultCode)
+    print("Fault Message: %s", err.faultString)
+    sys.exit(-1)
 
 
-def python_logo():
-	pass
+def send_file(path):
+    with open(path, "rb") as handle:
+        binary_data = xmlrpc.client.Binary(handle.read())
+    proxy.receive_file(os.path.basename(path), binary_data)
+
 
 def make_subparser(parser, name, callback, arg_name, subparsers, nargs="+", help_message=""): 
-	subparser = subparsers.add_parser(name, help=help_message)
+    subparser = subparsers.add_parser(name, help=help_message)
+    subparser.add_argument(arg_name, nargs=nargs, help="")
+    subparser.set_defaults(func=callback)
 
-	subparser.add_argument(arg_name, nargs=nargs, help="")
 
-	subparser.set_defaults(func=callback)
+#  def push(args):
+    #  if config.SERVER_URI.lower() != "localhost":
+        #  pass
+    #  print(args.filenames)
+    #  for f_name in args.filenames:
+        #  with open(f_name, "rb") as fileData:
+            #  try:
+                #  proxy.push(f_name, xmlrpc.client.Binary(fileData.read()));
+            #  except Exception as err:
+                #  print("There was an exceoption: {}".format(err))
 
-def push(args):
-	if config.SERVER_URI.lower() != "localhost":
-		pass
-	print(args.filenames)
-	for f_name in args.filenames:
-		with open(f_name, "rb") as fileData:
-			try:
-				proxy.push(f_name, xmlrpc.client.Binary(fileData.read()));
-			except Exception as err:
-				print("There was an exceoption: {}".format(err))
-			
+
 def add(args):
-	hash_keys = proxy.add(args.filenames)
-	if isinstance(hash_keys, Exception):
-		print("Exception occurred: {}".format(hash_keys))
-	else:
-		print("The hash keys for the torrents stored at {} (respectively) are: {}.".format(args.filenames, hash_keys))
+    for f_path in args.filenames:
+        send_file(f_path)
+    hash_keys = proxy.add([os.path.basename(f_path) for f_path in args.filenames])
+    if isinstance(hash_keys, Exception):
+        print("Exception occurred: {}".format(hash_keys))
+    else:
+        print("The hash keys for the torrents stored at {} (respectively) are: {}.".format(args.filenames, hash_keys))
 
 
 def remove(args):
-	paths = proxy.remove(args.hash_keys)
-	if isinstance(paths, Exception):
-		print("Exception occurred: {}".format(paths))
-	else:
-		print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
+    paths = proxy.remove(args.hash_keys)
+    if isinstance(paths, Exception):
+        print("Exception occurred: {}".format(paths))
+    else:
+        print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
 
 
 def pause(args):
-	paths = proxy.pause(args.hash_keys)
-	if isinstance(paths, Exception):
-		print("Exception occurred: {}".format(paths))
-	else:
-		print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
+    paths = proxy.pause(args.hash_keys)
+    if isinstance(paths, Exception):
+        print("Exception occurred: {}".format(paths))
+    else:
+        print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
 
 
 def resume(args):
-	paths = proxy.resume(args.hash_keys)
-	if isinstance(paths, Exception):
-		print("Exception occurred: {}".format(paths))
-	else:
-		print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
+    paths = proxy.resume(args.hash_keys)
+    if isinstance(paths, Exception):
+        print("Exception occurred: {}".format(paths))
+    else:
+        print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
 
 
 def info(args):
-	for info in proxy.add(args.hash_keys):
-		if isinstance(info, str):
-			print(info)
-		else:
-			print("Exception occurred: {}".format(info))
-			sys.exit(-1)
+    for info in proxy.add(args.hash_keys):
+        if isinstance(info, str):
+            print(info)
+        else:
+            print("Exception occurred: {}".format(info))
+            sys.exit(-1)
 
 
 def retrieve(args):
-	is_remote = config.SERVER_URI != "localhost"
-	if is_remote:
-        
-		for path in proxy.retrieve(args.hash_keys):
-			if is_remote:
-				# scp -r each of the directories
-				scp.get(path, recursive=True)
-			else:
-				# normal copy each directory tree
-				shutil.copytree(path, os.getcwd())
- 
+    server_paths = proxy.retrieve(args.hash_keys)
+
+
+
 def main():
 	#transport = ProxyInterface()
 	#try:
@@ -139,14 +137,13 @@ def main():
 	arguments = parser.parse_args()
 
 	try:
-		# try to run appropriate function
-		arguments.func(arguments)
+	    # try to run appropriate function
+	    arguments.func(arguments)
 	except Exception as e:
-		print("Exception occurred: {}".format(e))
-		return -1
+            print("Exception occurred: {}".format(e))
+            return -1
 
 	return 0
-
 
 
 if __name__=="__main__":

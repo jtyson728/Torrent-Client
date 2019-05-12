@@ -1,4 +1,4 @@
-from paramiko import SSHClient, AutoAddPolicy
+#  from paramiko import SSHClient, AutoAddPolicy
 from scp import SCPClient
 
 def createSSHClient(server, port, user, password):
