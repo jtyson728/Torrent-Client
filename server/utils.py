@@ -1,5 +1,6 @@
 import asyncio
 import os
+import logging
 import signal
 import sys
 from contextlib import closing, suppress
@@ -61,11 +62,13 @@ def run_async(coro):
 
 
 async def add_torrent(paths, download_dir):
-    torrents = [TorrentInfo.from_file(path, download_dir=download_dir) for path in paths]
+    torrents = map(
+            partial(TorrentInfo.from_file, download_dir=download_dir),
+            paths)
 
     async with ControlClient() as client:
-	    for info in torrents:
-		    await client.execute(partial(ControlManager.add, torrent_info=info))
+        for info in torrents:
+	        await client.execute(partial(ControlManager.add, torrent_info=info))
 
 
 async def remove_torrent(paths, download_dir):
@@ -99,3 +102,22 @@ async def resume_torrent(paths, download_dir):
 			await client.execute(partial(
 				ControlManager.resume,
 				info_hash=info.download_info.info_hash))
+
+def status_server_handler(manager: ControlManager) -> List[TorrentState]:
+    torrents = manager.get_torrents()
+    torrents.sort(key=lambda info: info.download_info.suggested_name)
+    return [TorrentState(torrent_info) for torrent_info in torrents]
+
+
+async def status_handler():
+    async with ControlClient() as client:
+        torrent_states = await client.execute(status_server_handler)
+    if not torrent_states:
+        print('No torrents added')
+        return
+
+    paragraphs = [formatters.join_lines(formatters.format_title(state, False) +
+                                        formatters.format_status(state, False))
+                  for state in torrent_states]
+
+    return "\n".join(paragraphs).rstrip()

@@ -409,7 +409,7 @@ _wakeup_waiter	torrent_client/network/tracker_clients/udp.py	/^    def _wakeup_w
 accept	torrent_client/network/peer_tcp_client.py	/^    async def accept(self, reader: asyncio.StreamReader, writer: asyncio.StreamWriter) -> bytes:$/;"	m	class:PeerTCPClient
 accept_client	torrent_client/algorithms/peer_manager.py	/^    def accept_client(self, peer: Peer, client: PeerTCPClient):$/;"	m	class:PeerManager
 accept_client	torrent_client/algorithms/torrent_manager.py	/^    def accept_client(self, peer: Peer, client: PeerTCPClient):$/;"	m	class:TorrentManager
-add	endpoints.py	/^def add(f_names, paths):$/;"	f
+add	endpoints.py	/^def add(f_names, files):$/;"	f
 add	torrent_client/control/manager.py	/^    def add(self, torrent_info: TorrentInfo):$/;"	m	class:ControlManager
 add_downloaded	torrent_client/models.py	/^    def add_downloaded(self, peer: Peer, size: int):$/;"	m	class:SessionStatistics
 add_handler	torrent_cli.py	/^async def add_handler(args):$/;"	f
@@ -505,7 +505,7 @@ datagram_received	torrent_client/network/tracker_clients/udp.py	/^    def datagr
 delegate_to_executor	torrent_client/file_structure.py	/^def delegate_to_executor(func):$/;"	f
 deque	torrent_client/algorithms/downloader.py	/^from collections import deque, OrderedDict$/;"	i
 deque	torrent_client/algorithms/speed_measurer.py	/^from collections import deque$/;"	i
-destroy_server	endpoints.py	/^def destroy_server(p, f_names):$/;"	f
+destroy_server	server.py	/^def destroy_server(p, f_names):$/;"	f
 directory_icon	torrent_gui.py	/^directory_icon = load_icon('directory')$/;"	v
 downloaded	torrent_client/models.py	/^    def downloaded(self) -> bool:$/;"	m	class:PieceInfo
 downloaded	torrent_client/network/peer_tcp_client.py	/^    def downloaded(self):$/;"	m	class:PeerTCPClient
@@ -678,7 +678,7 @@ ratio	torrent_client/models.py	/^    def ratio(self) -> float:$/;"	m	class:Torre
 re	endpoints.py	/^import re$/;"	i
 re	torrent_cli.py	/^import re$/;"	i
 read	torrent_client/file_structure.py	/^    def read(self, offset: int, length: int):$/;"	m	class:FileStructure
-receive_file	server.py	/^def receive_file(f_name, binaryData):$/;"	f
+receive_file	endpoints.py	/^def receive_file(f_name, binaryData):$/;"	f
 receive_object	torrent_client/control/server.py	/^    async def receive_object(reader: asyncio.StreamReader) -> Any:$/;"	m	class:ControlServer
 recv	torrent_client/network/tracker_clients/udp.py	/^    async def recv(self) -> bytes:$/;"	m	class:DatagramReaderProtocol
 remove	endpoints.py	/^def remove(f_names, hash_keys):$/;"	f
@@ -719,7 +719,7 @@ sources	torrent_client/models.py	/^    def sources(self) -> Set[Peer]:$/;"	m	cla
 start	torrent_client/control/manager.py	/^    async def start(self):$/;"	m	class:ControlManager
 start	torrent_client/control/server.py	/^    async def start(self):$/;"	m	class:ControlServer
 start	torrent_client/network/peer_tcp_server.py	/^    async def start(self):$/;"	m	class:PeerTCPServer
-start_server	endpoints.py	/^def start_server():$/;"	f
+start_server	server.py	/^def start_server():$/;"	f
 started	torrent_client/network/tracker_clients/base.py	/^    started = 2$/;"	v	class:EventType
 state	torrent_gui.py	/^    def state(self) -> TorrentState:$/;"	m	class:TorrentListWidgetItem
 state	torrent_gui.py	/^    def state(self, state: TorrentState):$/;"	m	class:TorrentListWidgetItem
