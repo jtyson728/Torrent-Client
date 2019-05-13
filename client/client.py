@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 from functools import partial
-#from paramiko import SSHClient
-#  from utils import *
-#  from scp import SCPClient
+# from paramiko import SSHClient
+# from utils import *
+# from scp import SCPClient
 import argparse
 import asyncio 
 import config
@@ -19,7 +19,7 @@ try:
     time.sleep(3)
 		
 except xmlrpc.client.Fault as err:
-    print("a Fault error ocurred.")
+    print("Connection fault occurred.")
     print("Fault code: %d", err.faultCode)
     print("Fault Message: %s", err.faultString)
     sys.exit(-1)
@@ -31,22 +31,11 @@ def send_file(path):
     proxy.receive_file(os.path.basename(path), binary_data)
 
 
-def make_subparser(parser, name, callback, arg_name, subparsers, nargs="+", help_message=""): 
+def make_subparser(parser, name, callback, subparsers, arg_name=None, nargs="+", help_message=""): 
     subparser = subparsers.add_parser(name, help=help_message)
-    subparser.add_argument(arg_name, nargs=nargs, help="")
+    if arg_name:
+        subparser.add_argument(arg_name, nargs=nargs, help="")
     subparser.set_defaults(func=callback)
-
-
-#  def push(args):
-    #  if config.SERVER_URI.lower() != "localhost":
-        #  pass
-    #  print(args.filenames)
-    #  for f_name in args.filenames:
-        #  with open(f_name, "rb") as fileData:
-            #  try:
-                #  proxy.push(f_name, xmlrpc.client.Binary(fileData.read()));
-            #  except Exception as err:
-                #  print("There was an exceoption: {}".format(err))
 
 
 def add(args):
@@ -72,7 +61,7 @@ def pause(args):
     if isinstance(paths, Exception):
         print("Exception occurred: {}".format(paths))
     else:
-        print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
+        print("The torrents at paths {} with hash keys {} have been paused.".format(paths, args.hash_keys))
 
 
 def resume(args):
@@ -80,70 +69,85 @@ def resume(args):
     if isinstance(paths, Exception):
         print("Exception occurred: {}".format(paths))
     else:
-        print("The torrents at paths {} with hash keys {} has been removed.".format(paths, args.hash_keys))
+        print("The torrents at paths {} with hash keys {} has been resumed.".format(paths, args.hash_keys))
 
 
 def info(args):
-    for info in proxy.add(args.hash_keys):
-        if isinstance(info, str):
-            print(info)
-        else:
-            print("Exception occurred: {}".format(info))
-            sys.exit(-1)
+    info = proxy.info()
+    if isinstance(info, str):
+        print(info)
+    else:
+        print("Exception occurred: {}".format(info))
+        sys.exit(-1)
 
 
 def retrieve(args):
     server_paths = proxy.retrieve(args.hash_keys)
-
+    print("Paths on the server side are: {}. Use SCP (or similar) to retrieve them.".format(server_paths))
 
 
 def main():
-	#transport = ProxyInterface()
-	#try:
-		#proxy = xmlrpc.client.ServerProxy("http://{}:{}/".format(config.SERVER_URI, config.SERVER_PORT))
-		#time.sleep(3)
-		#print(proxy)
-		
-	#except xmlrpc.client.Fault as err:
-		#print("a Fault error ocurred.")
-		#print("Fault code: %d", err.faultCode)
-		#print("Fault Message: %s", err.faultString)
-		#return
-			
-	#else:
-	print(proxy)
-	parser = argparse.ArgumentParser(description="A client for the torrent RPC server (CLI)")
+    parser = argparse.ArgumentParser(description="A client for the torrent RPC server (CLI)")
 
-	subparsers = parser.add_subparsers(
-		description="Specify an action before --help to show parameters for it",
-		metavar="ACTION",
-		dest="action")
+    subparsers = parser.add_subparsers(
+            description="Specify an action before --help to show parameters for it",
+            metavar="ACTION",
+            dest="action")
 
-	# subparser for add
-	make_subparser(parser, name="add", callback=add, arg_name="filenames", subparsers=subparsers)
+    # subparser for add
+    make_subparser(
+            parser,
+            name="add",
+            callback=add,
+            arg_name="filenames",
+            subparsers=subparsers)
 
-	make_subparser(parser, name="remove", callback=remove, arg_name="hash_keys", subparsers=subparsers)
+    make_subparser(
+            parser,
+            name="remove",
+            callback=remove,
+            arg_name="hash_keys",
+            subparsers=subparsers)
 
-	make_subparser(parser, name="pause", callback=pause, arg_name="hash_keys", subparsers=subparsers)
+    make_subparser(
+            parser,
+            name="pause",
+            callback=pause,
+            arg_name="hash_keys",
+            subparsers=subparsers)
 
-	make_subparser(parser, name="resume", callback=resume, arg_name="hash_keys", subparsers=subparsers)
+    make_subparser(
+            parser,
+            name="resume",
+            callback=resume,
+            arg_name="hash_keys",
+            subparsers=subparsers)
 
-	make_subparser(parser, name="info", callback=info, arg_name="hash_keys", subparsers=subparsers)
+    make_subparser(
+            parser,
+            name="info",
+            callback=info,
+            subparsers=subparsers)
 
-	make_subparser(parser, name="retrieve", callback=retrieve, arg_name="hash_keys", subparsers=subparsers)
-	
-	# make_subparser(parser, name="push", callback=push, arg_name="filenames", subparsers=subparsers)
-		
-	arguments = parser.parse_args()
+    make_subparser(
+            parser,
+            name="retrieve",
+            callback=retrieve,
+            arg_name="hash_keys",
+            subparsers=subparsers)
+    
+    # make_subparser(parser, name="push", callback=push, arg_name="filenames", subparsers=subparsers)
+            
+    arguments = parser.parse_args()
 
-	try:
-	    # try to run appropriate function
-	    arguments.func(arguments)
-	except Exception as e:
-            print("Exception occurred: {}".format(e))
-            return -1
+    try:
+        # try to run appropriate function
+        arguments.func(arguments)
+    except Exception as e:
+        print("Exception occurred: {}".format(e))
+        return -1
 
-	return 0
+    return 0
 
 
 if __name__=="__main__":
