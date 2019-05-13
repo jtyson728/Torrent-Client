@@ -19,10 +19,8 @@ def start_server():
     p = Process(target=run_daemon)
     p.start()
 
-    keys_path = os.path.join(os.getcwd(), "hash_keys.json")
-
-    if os.path.exists(keys_path):
-        with open(keys_path) as keys_file:
+    if os.path.exists(config.KEYS_PATH):
+        with open(config.KEYS_FILE) as keys_file:
             return (p, json.load(keys_file))
     else:
         return (p, {})
